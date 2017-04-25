@@ -7,9 +7,6 @@
 
 ; use Carp ()
 
-# Nicht übertragene Features der alten CDML Klasse
-# - nachträgliches Ändern des Encoding
-
 ; use base 'Exporter'
 ; our @EXPORT_OK = ('Cdml')
 
@@ -60,7 +57,8 @@
 
 ; sub portal
     { my ($self,$opts,@args) = @_
-    ; my $name = $opts->{'name'} || Carp::croak "CDML: No name specified for portal."
+    ; my $name = $opts->{'name'} || 
+        Carp::croak "CDML: No name specified for portal."
     ; my $markup = $baseclasses[1]->new('Portal',@args)
     ; return $markup->set_tag_param($name)
     }
@@ -82,7 +80,8 @@
 
 ; sub client
     { my ($self,$info) = @_
-    ; $info = $client{lc($info)} || Carp::croak "CDML: Unknown client info type '$info'."
+    ; $info = $client{lc($info)} || 
+        Carp::croak "CDML: Unknown client info type '$info'."
     ; return $baseclasses[0]->new("Client$info")
     }
     
@@ -92,9 +91,10 @@
     
 ; sub content
     { my ($self,$info,$arg) = @_
-    ; $info = $content{lc($info)} || Carp::croak "CDML: Unknown Content-Header '$info'."
-    ; my $element = $baseclasses[1]->new("Content$info")
-    ; $element->insert($arg)
+    ; $info = $content{lc($info)} || 
+        Carp::croak "CDML: Unknown Content-Header '$info'."
+    ; my $element = $baseclasses[0]->new("Content$info")
+    ; $element->set_tag_param($arg)
     ; return $element
     }
 
