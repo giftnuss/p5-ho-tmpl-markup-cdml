@@ -1,8 +1,8 @@
 {
     "name": "dingle/p5-ho-tmpl-markup-cdml",
     "description": "Generate CDML markup perl5 module",
-    "type": "perl5-module"
-    "license": "BSD-3",
+    "type": "perl5-module",
+    "license": "Artistic-2.0",
     "authors": [
         {
             "name": "Mike Würfel",
