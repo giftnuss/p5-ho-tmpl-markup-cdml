@@ -1,1 +1,10 @@
+*~
 site-lib/
+vendor/
+Build
+MANIFEST.SKIP.bak
+MYMETA.json
+MYMETA.yml
+_build/
+blib/
+ 
