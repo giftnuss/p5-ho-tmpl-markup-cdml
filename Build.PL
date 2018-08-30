@@ -12,8 +12,6 @@ Module::Build->new
 
       requires =>
           { perl => 5.010
-      },
-      build_requires =>
-          { 'lib::vendor' => '0.14.163'
-          }
+          , 'HO::class' => 0.07
+      }
     )->create_build_script;
