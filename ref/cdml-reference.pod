@@ -1,0 +1,3282 @@
+
+=head 2 Sending Mails
+
+=over 4
+
+=item -MailBCC
+
+Specifies the email address of the person that should be blind carbon copied.
+Value is an email address.
+
+Syntax example - Send mail using a form action
+
+   <form action="FMPro" method="post">
+     <input type="hidden" name="-DB" value="contacts.fp5">
+     <input type="hidden" name="-Format" value="displaypage.html">
+     <input type="text" name="-MailTo" value="Keith@Company.COM">
+     <input type="text" name="-MailCC" value="Dirk@Company.COM">
+     <input type="text" name="-MailBCC" value="Terry@Company.COM">
+     <input type="text" name="-MailFrom" value="Chris@Company.COM">
+     <input type="text" name="-MailSub" value="The Subject">
+     <input type="hidden" name="-MailHost" value="SMTP.Company.COM">
+     <input type="hidden" name="-MailFormat" value="mail.txt">
+     <input type="submit" name="-View" value="Send Message">
+   </form>
+   
+Other tags that are required -DB, -MailTo, -MailFrom, -MailSub, 
+-MailHost, -MailFormat, any action tag
+
+See also -MailCC
+
+=item -MailCC
+
+Specifies the email address of the person who should be carbon copied.
+Value is an email address.
+
+Syntax example - Send mail using a form action
+
+   <form action="FMPro" method="post">
+     <input type="hidden" name="-DB" value="contacts.fp5">
+     <input type="hidden" name="-Format" value="displaypage.html">
+     <input type="text" name="-MailTo" value="Keith@Company.COM">
+     <input type="text" name="-MailCC" value="Dirk@Company.COM">
+     <input type="text" name="-MailBCC" value="Terry@Company.COM">
+     <input type="text" name="-MailFrom" value="Chris@Company.COM">
+     <input type="text" name="-MailSub" value="The Subject">
+     <input type="hidden" name="-MailHost" value="SMTP.Company.COM">
+     <input type="hidden" name="-MailFormat" value="mail.txt">
+     <input type="submit" name="-View" value="Send Message">
+   </form>
+
+Other tags that are required -DB, -MailTo, -MailFrom, -MailSub, 
+-MailHost, -MailFormat, any action tag
+
+See also -MailBCC
+
+=back
+
+=head2 HTML Elements
+
+=item CheckBox
+
+An HTML input type. Used by a browser to display checkbox(es).
+This is not a FileMaker Pro tag, This is standard HTML.
+Do not include calculation or summary field types on 
+add or update format files, as data can't be entered 
+into these field types.
+
+Syntax
+
+   <input type="checkbox" name="Field" value="Data" Checked>Checkbox 
+Label
+
+Field - The name of the field that you want the data to go into.
+
+Data - The information that should be placed into the field.
+
+Checked (optional) - Specifies that the checkbox is 
+checked. If the word "checked" is not present, the checkbox 
+is not checked.
+
+Checkbox Label - The label that the user sees in the browser.
+
+Syntax example - Display checkboxes using an HTML file
+
+   <form action="FMPro" method="post">
+     <input type="hidden" name="-DB" value="db.fp5">
+     <input type="hidden" name="-Format" value="results.htm">
+     <input type="checkbox" name="Country" value="F1">France
+     <input type="checkbox" name="Country" value="G7" checked>Germany
+     <input type="checkbox" name="Country" value="I4" checked>Iceland
+     <input type="checkbox" name="Country" value="U2">USA
+     <input type="submit" name="-New" value="New Record">
+   </form>
+
+=back
+
+=head2 Client Information
+
+=item [FMP-ClientAddress]
+
+[FMP-ClientAddress] is replaced with the current client's host name.
+If the host name is not available, the client's IP number is provided. 
+Note Looking up the host name of client can be a lengthy 
+operation; consider using [FMP-ClientIP] if all you 
+want to track is a specific client.
+
+Syntax example - Return current address using an HTML file
+
+   Your host address is: [FMP-ClientAddress]
+   
+   <!-- After processing it could look like:
+      Your host address is: machineone.company.com
+   -->
+
+See also [FMP-ClientIP]
+
+=item [FMP-ClientIP]
+
+[FMP-ClientIP] is replaced with the current client's IP address.
+
+Syntax example - Return client's current IP address using an HTML file
+
+   Your IP number is: [FMP-ClientIP]
+   
+   <!-- After processing it could look like:
+       Your IP number is: 199.199.9.9
+   -->
+
+See also [FMP-ClientAddress]
+
+=item [FMP-ClientPassword]
+
+[FMP-ClientPassword] is replaced with the current HTTP-authenticated 
+client password.
+Syntax example(s)
+Return the client password using an HTML file
+Your password is: [FMP-ClientPassword]
+   <!-- After processing it could look like:
+Your password is: secret
+-->
+
+=item [FMP-ClientType]
+
+[FMP-ClientType] is replaced with the current browser 
+client type.
+The browser client type, also known as the "user agent", 
+is an arbitrary text string of up to 256 characters 
+sent by the browser in the HTTP request header. The 
+client type can be used in the [FMP-If] tag with the 
+"contains" operator to determine what sort of browser 
+the person accessing your Web site is using. 
+Syntax example(s)
+Return the client type using an HTML file
+Your browser type is: [FMP-ClientType]
+   <!-- After processing it could look like:
+Your browser type is: Mozilla/3.01 (Macintosh; I; PPC)
+-->
+Checking the type of browser in an HTML file
+[FMP-If: ClientType .cn. Mozilla/2.0 ]
+This page contains JavaScript that will work only on
+Netscape 3.0 compatible or better browsers.
+[/FMP-If]
+Some common browser client types
+Browser Browser Client Type (User Agent) 
+Netscape Navigator 3.0 (Mac PPC) Mozilla/3.0 (Macintosh; 
+I; PPC) 
+Netscape Navigator 3.0 (Win 95) Mozilla/3.0 (Win95; 
+I) 
+Microsoft Internet Explorer 2.1 (Mac PPC) Mozilla/2.0 
+(compatible; MSIE 2.1; Mac_PowerPC) 
+Microsoft Internet Explorer 3.0 (Win 95) Mozilla/2.0 
+(compatible; MSIE 3.0; Windows 95) 
+America Online 3.0 (Mac PPC) Mozilla/2.0 (compatible; 
+AOL 3.0; Mac_PowerPC) 
+America Online 3.0 (Win 95) Mozilla/2.0 (compatible; 
+AOL-IWENG 3.0; Win16) 
+
+=item [FMP-ClientUserName]
+
+[FMP-ClientUserName] is replaced with the client's user 
+name from HTTP authentication.
+Syntax example(s)
+Return the client's user name using an HTML file
+Your name is: [FMP-ClientUserName]
+   <!-- After processing it could look like:
+Your name is: John
+-->
+
+=item [FMP-ContentMimeType]
+
+[FMP-ContentMIMEType] is replaced with nothing in the 
+HTML and changes the MIME type returned to the browser.
+This tag changes the content type line in the HTTP header 
+to the MIME type specified. The default MIME type for 
+format files return by the FileMaker Pro Web Companion 
+is text/html. Consult RFC 2068, Hypertext Transfer Protocol 
+-- HTTP/1.1 for more information about HTTP header lines 
+and MIME type specification. <http://ds.internic.net/rfc/rfc2068.txt>
+Syntax
+[FMP-ContentMIMEType: Mime Type ]
+Parameter(s)
+First parameter: MIME type.
+Syntax example(s)
+Change the Content MIME type using an HTML file
+Some sample [FMP-ContentMIMEType: text/plain] text.
+   <!-- After processing it could look like:
+Some sample text.
+-->
+
+=item [FMP-Cookie]
+
+[FMP-Cookie] is replaced with the current value of the 
+specified cookie.
+A cookie is saved by the browser; therefore, your user's 
+browser must support this feature. Older browsers may 
+not support this feature.
+Syntax
+[FMP-Cookie: CookieName , Encoding ]
+Parameter(s)
+First parameter: Name of the cookie to return.
+Second parameter (optional): Encoding. Use one of the 
+following reserved words:
+Raw - (default) Don't perform any encoding
+URL - Perform URL encoding
+Syntax example(s)
+Return the value of the current cookie using an HTML 
+file
+[FMP-If: CurrentCookie:ColorChoice .neq. ""]
+Thanks for coming back! The latest products in [FMP-Cookie: 
+ColorChoice]
+are listed below.
+[/FMP-If]
+   <!-- After processing it could look like:
+Thanks for coming back! The latest products in green
+are listed below.
+-->
+See also
+[FMP-SetCookie]
+
+=item [FMP-CurrentAction]
+
+[FMP-CurrentAction] is replaced with the name of the 
+current action, such as: find, findall, new, edit, delete, 
+view, or dup.
+Syntax
+[FMP-CurrentAction: Encoding ]
+Parameter(s)
+First parameter: Encoding. Use one of the following 
+reserved words:
+HTML - (default) Perform HTML encoding 
+Display - Returns the action in the language specified 
+by the Web Companion Configuration
+Syntax example(s)
+Return the name of the current action using an HTML 
+file
+Last action was: [FMP-CurrentAction]
+   <!-- After processing it could look like:
+Last action was: view
+-->
+
+=item [FMP-CurrentDatabase]
+
+[FMP-CurrentDatabase] is replaced with the name of the 
+database being processed.
+Syntax
+[FMP-CurrentDatabase: Encoding ]
+Parameter(s)
+First parameter (optional): Encoding. Use one of the 
+following reserved words:
+Raw - Don't perform any encoding
+URL - Perform URL encoding
+HTML - (default) Perform HTML encoding 
+Syntax example(s)
+Returns the name of the current database, using an HTML 
+file
+You are viewing the [FMP-CurrentDatabase: HTML] database.
+   <!-- After processing it could look like:
+You are viewing the Contact.fp5 database.
+-->
+See also
+-DB
+
+=item [FMP-CurrentDate]
+
+[FMP-CurrentDate] is replaced with the current date.
+Syntax
+[FMP-CurrentDate: Format ]
+Parameter(s)
+First parameter (optional): Format. Use one of the following 
+reserved words:
+Short - (default) returns the current date in the OS's 
+definition of a short date (e.g. 3/3/98).
+Abbrev - returns the current date in the OS's definition 
+of an abbreviated date (e.g. Tue, Mar 3, 1998).
+Long - returns the current date in the OS's definition 
+of a long date (e.g. Tuesday, March 3, 1998).
+Syntax example(s)
+Returns the current date using an HTML file
+Current date is: [FMP-CurrentDate]
+   <!-- After processing it could look like:
+Current date is: 3/3/98
+-->
+
+=item [FMP-CurrentDay]
+
+[FMP-CurrentDay] is replaced with the name of the current 
+day of the week.
+Syntax
+[FMP-CurrentDay: Format ]
+Parameter(s)
+First parameter (optional): Format. Use one of the following 
+reserved words:
+Short - (default) returns the current day name in the 
+OS's definition of a short day name (e.g. MON).
+Long - returns the current day name in the OS's definition 
+of a long day name (e.g. Monday).
+Syntax example(s)
+Returns the current day using an HTML file
+Current day is: [FMP-CurrentDay: Long]
+   <!-- After processing it could look like:
+Current day is: Monday
+-->
+
+=item [FMP-CurrentError]
+
+[FMP-CurrentError] is replaced with the FileMaker Pro 
+error number from the current action. For information 
+on possible result numbers, search FileMaker's onscreen 
+Help for status functions and then find "Status(CurrentError) 
+function".
+Syntax example(s)
+Return the current error number using an HTML file
+The last operation failed with error number [FMP-CurrentError].
+   <!-- After processing it could look like:
+The last operation failed with error number 500.
+-->
+
+=item [FMP-CurrentFind]
+
+Repeats the HTML between [FMP-CurrentFind] and [/FMP-CurrentFind] 
+for each find criteria that was part of the request 
+that created this page.
+Syntax example(s)
+Return information about the current find using an HTML 
+file
+Current find request is:
+[FMP-CurrentFind]
+Field: [FMP-FindFieldItem], Op: [FMP-FindOpItem], Value: 
+[FMP-FindValueItem]<br>
+[/FMP-CurrentFind]
+   <!-- After processing it could look like:
+Current find request is:
+Field: First Name, Op: begins with, Value: Joe
+Field: Last Name, Op: equals, Value: Doe
+-->
+Other tags that are required
+[/FMP-CurrentFind]
+See also
+[FMP-FindFieldItem], [FMP-FindOpItem], [FMP-FindValueItem]
+
+=item [FMP-CurrentFormat]
+
+[FMP-CurrentFormat] is replaced with the name of the 
+current format file being processed.
+Syntax
+[FMP-CurrentFormat: Encoding ]
+Parameter(s)
+First parameter (optional): Encoding. Use one of the 
+following reserved words:
+Raw - Don't perform any encoding
+URL - Perform URL encoding
+HTML - (default) Perform HTML encoding 
+Syntax example(s)
+Returns the name of the current format file, using an 
+HTML file
+This page was formatted with file: [FMP-CurrentFormat].
+   <!-- After processing it could look like:
+This page was formatted with file: Detail.htm.
+-->
+See also
+-Format
+
+=item [FMP-CurrentFoundCount]
+
+[FMP-CurrentFoundCount] is replaced with the total number 
+of records in the current found set.
+Syntax example(s)
+Returns the total number of records in the found set 
+using an HTML file
+Record(s) in found set: [FMP-CurrentFoundCount]
+   <!-- After processing it could look like:
+Record(s) in found set: 12
+-->
+
+=item [FMP-CurrentLayout]
+
+[FMP-CurrentLayout] is replaced with the name of the 
+layout being used to process this page.
+Syntax
+[FMP-CurrentLayout: Encoding ]
+Parameter(s)
+First parameter (optional): Encoding. Use one of the 
+following reserved words:
+Raw - Don't perform any encoding
+URL - Perform URL encoding
+HTML - (default) Perform HTML encoding 
+Syntax example(s)
+Returns the name of the current layout, using an HTML 
+file
+This page was formatted using the layout: [FMP-CurrentLayout].
+   <!-- After processing it could look like:
+This page was formatted using the layout: Detail Layout.
+-->
+See also
+-Lay
+
+=item [FMP-CurrentLOP]
+
+[FMP-CurrentLOP] is replaced with the logical operator 
+used for the current search.
+Syntax example(s)
+Returns the current logical operator using an HTML file
+You just did an "[FMP-CurrentLOP]" style search.
+   <!-- After processing it could look like:
+You just did an "or" style search.
+-->
+See also
+-LOP
+
+=item [FMP-CurrentMax]
+
+[FMP-CurrentMax] is replaced with the maximum number 
+of records that was specified to be displayed on this 
+page. It is the value of the -Max variable that was 
+passed in.
+Syntax example(s)
+Returns the current -Max value, using an HTML file
+Click the button at the bottom of the page
+to see the next [FMP-CurrentMax] records.
+   <!-- After processing it could look like:
+Click the button at the bottom of the page
+to see the next 10 records.
+-->
+See also
+-Max
+
+=item [FMP-CurrentModID]
+
+The -ModID tag is an optional tag that can be used with 
+a -Edit action request. The value would be the modification 
+id that has to match the record before the -Edit action 
+can complete successfully and a new error code (306) 
+would be returned if the mod ids did not match. If there 
+is no -Mod tag then the -Edit action would work as it 
+currently does. In addition CurrentRecID and CurrentModID 
+would be added as constants to the FMP-If tag as numeric 
+types.
+Syntax example(s)
+   <!-- Make sure when updating the "country", no one else 
+changed it -->
+   <FORM ACTION="FMPro" METHOD="POST">
+  <INPUT TYPE="HIDDEN" NAME="-DB" VALUE="contacts.fp5">
+  <INPUT TYPE="HIDDEN" NAME="-Format" VALUE="results.htm">
+  <INPUT TYPE="HIDDEN" NAME="-RecID" VALUE="[FMP-CurrentRecID]">
+  <INPUT TYPE="HIDDEN" NAME="-ModID" VALUE="[FMP-CurrentModID]">
+  <INPUT TYPE="TEXT" NAME="Country">
+  <INPUT TYPE="SUBMIT" NAME="-Edit" VALUE="Edit This Record">
+   </FORM>
+See also
+-ModID
+
+=item [FMP-CurrentPortalRowNumber]
+
+[FMP-CurrentPortalRowNumber] is replaced with the row 
+number of the current portal being processed.
+Parameter(s)
+Syntax example(s)
+Returns the name of the current database, using an HTML 
+file
+   <!-- Add row number in front of each portal row -->
+[FMP-Portal:lineitems]
+[FMP-CurrentPortalRowNumber]: [FMP-Field:lineitems::name]<br>
+[/FMP-Portal]
+   <!-- After processing it could look like:
+1: Red
+-->
+See also
+[FMP-Portal]
+
+=item [FMP-CurrentRecordCount]
+
+[FMP-CurrentRecordCount] is replaced with the total 
+number of records in the database.
+Syntax example(s)
+Returns the total number of records in the database 
+using an HTML file
+Total number of records in the database is: [FMP-CurrentRecordCount]
+   <!-- After processing it could look like:
+Total number of records in the database is: 1123
+-->
+
+=item [FMP-CurrentRecID]
+
+[FMP-CurrentRecID] is replaced with the record keyï¿½a 
+number representing the current record.
+If [FMP-CurrentRecID] is placed between the [FMP-Record] 
+and [/FMP-Record] tags, [FMP-CurrentRecID] is replaced 
+with the record key of each record in the sequence.
+Syntax example(s)
+Delete a record using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="name.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="hidden" name="-RecID" value="[FMP-CurrentRecID]">
+   <input type="submit" name="-Delete" value="Delete This 
+Record">
+   </form>
+Display a hit list using [FMP-CurrentRecID] instead 
+of [FMP-LinkRecID]
+[FMP-Record]Click <a href=
+"FMPro?-DB=db.fp5&-Format=rslt.htm&-RecID=[FMP-CurrentRecID]&-Find">here</a>
+to view record [FMP-CurrentRecordNumber].<br>
+[/FMP-Record]
+   <!-- After processing, the HTML sent to the browser 
+could look like:
+Click <a href="FMPro?-DB=db.fp5&-Format=rslt.htm&-RecID=1&-Find">here</a>
+to view record 1.<br>
+Click <a href="FMPro?-DB=db.fp5&-Format=rslt.htm&-RecID=4&-Find">here</a>
+to view record 2.<br>
+Click <a href="FMPro?-DB=db.fp5&-Format=rslt.htm&-RecID=10&-Find">here</a>
+to view record 3.<br>
+-->
+See also
+-RecID, [FMP-LinkRecID]
+
+
+Table (2,3):
+=item [FMP-CurrentRecordNumber]
+
+[FMP-CurrentRecordNumber] is replaced with the record's 
+position in the current found set.
+Syntax example(s)
+Returns the current record number using an HTML file
+Current record in found set: [FMP-CurrentRecordNumber]
+   <!-- After processing it could look like:
+Current record in found set: 3
+-->
+
+=item [FMP-CurrentRepeatNumber]
+
+[FMP-CurrentRepeatNumber] is replaced with the repetition 
+currently being processed.
+Syntax example(s)
+Returns the current repetition number using an HTML 
+file
+   <!-- Add a number in front of each repetition -->
+[FMP-Repeating: extensions]
+[FMP-CurrentRepeatNumber]: [FMP-RepeatingItem]<br>
+[/FMP-Repeating]
+   <!-- After processing it could look like:
+3: Green
+-->
+
+=item [FMP-CurrentSkip]
+
+[FMP-CurrentSkip] is replaced with the number of records 
+skipped from the beginning of the found set. This is 
+useful as a value to pass to the -Skip tag.
+Syntax example(s)
+Returns current record with -Skip instead of -RecID 
+using a link
+   <a href="FMPro?-DB=db.fp5&-Format=mdtl.hmt&-Max=1&-Skip=[FMP-CurrentSkip]&-findall">
+View more details</a>
+See also
+-Skip
+
+=item [FMP-CurrentSort]
+
+Repeats the HTML between [FMP-CurrentSort] and [/FMP-CurrentSort] 
+for each sort argument that was part of the request 
+that created this page.
+Syntax example(s)
+Return information about the current sort using an HTML 
+file
+Current sort order is:<br>
+[FMP-CurrentSort]
+Field: [FMP-SortFieldItem], Order: [FMP-SortOrderItem]<br>
+[/FMP-CurrentSort]
+   <!-- After processing it could look like:
+Current sort order is:
+Field: First Name, Order: descend
+Field: Last Name, Order: descend
+-->
+Other tags that are required
+[/FMP-CurrentSort]
+See also
+[FMP-SortFieldItem], [FMP-SortOrderItem]
+
+=item [FMP-CurrentTime]
+
+[FMP-CurrentTime] is replaced with the current time.
+Syntax
+[FMP-CurrentTime: Format ]
+Parameter(s)
+First parameter (optional): Format. Use one of the following 
+reserved words:
+Short - (default) returns the current time in the OS's 
+definition of a short time (e.g. 10:12 AM).
+Long - returns the current time in the OS's definition 
+of a long time (e.g. 10:12:32 AM).
+Syntax example(s)
+Returns the current time using an HTML file
+Current time is: [FMP-CurrentTime: short]
+   <!-- After processing it could look like:
+Current time is: 10:12 AM
+-->
+
+=item [FMP-CurrentToken]
+
+[FMP-CurrentToken] is replaced with the value of -Token 
+variable tag used to create the current page.
+Syntax
+[FMP-CurrentToken: Encoding ]
+Parameter(s)
+First parameter (optional): Encoding. Use one of the 
+following reserved words:
+Raw - Don't perform any encoding
+URL - Perform URL encoding
+HTML - (default) Perform HTML encoding 
+Syntax example(s)
+Returns the current token using an HTML file
+Your last reply was [FMP-CurrentToken: HTML].
+   <!-- After processing it could look like:
+Your last reply was sell.
+-->
+Up to nine tokens can be used by using a slightly different 
+syntax for the 
+token tags. The variable tag -Token can have an optional 
+token specifier of the form -Token.X
+where X can be the characters 0 through 9. If no period 
+follows the -Token keyword then token
+one is implied. To retrieve the value of a token the 
+FMP_CurrentToken will accept another
+parameter that is a number, of value 0 through 9. If 
+there is no number parameter, but there
+is a period, then token zero would be returned. CurrentToken 
+constant for the FMP-If tag
+would then have an optional specifier that would look 
+like CurrentToken:3 if you want to
+compare the contents of token three to something else.
+Example format file snippet:
+   <!-- Pass the value of token three onto the next request 
+-->
+   <INPUT TYPE="HIDDEN" NAME ="-Token.3" VALUE ="[FMP-CurrentToken: 
+3]">
+Tokens can be used on the right side of an FMP-If using 
+the intratag replacement syntax:
+[FMP-If: CurrentToken:5.eq.{CurrentToken:6}]
+   <B>Token 5 equals token 6.</B>
+[/FMP-If]
+See also
+-Token
+
+=item -DBClose
+
+Closes a database on the FileMaker host machine from 
+a remote browser.
+The -DBOpen and -DBClose actions tags would only use 
+the -db variable tag for the name of the database and 
+the partial path before FMPro? in the URL to determine 
+on which database to apply the action. The database 
+administrator will have to have remote administration 
+privileges and the database to be closed must be in 
+the Web folder. A format file is required to be specified 
+in the URL in order for -DBOpen to be processed.
+For security reasons, it is important to use the Remote 
+Administration Requires Password option, otherwise users 
+can close your database without an Administrator password.
+Syntax example(s)
+Close a database with a URL
+HTTP://thehost.com/FMPro?-Db=Employees.fp5&-format=aFormatFile.htm&-DbClose
+HTTP://thehost.com/asite/onlineordering/FMPro?-Db=main.fp5&-format=aFormatFile.htm&-DbClose
+Other tags that are required
+-DB, -format
+See also
+-DBOpen
+
+=item -DB
+
+Specifies the database that all processing of the request 
+will refer to.
+Value is
+Name of the database, including the extension if any. 
+The FileMaker Pro Web Companion uses only the name of 
+the database; do not include any path information. The 
+database must be open in FileMaker Pro.
+Syntax example(s)
+View a format file using a link
+   <a href="FMPro?-DB=Names.fp5&-Format=query.htm&-View">Take 
+me to a search page</a>
+View a format file using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="Names.fp5">
+   <input type="hidden" name="-Format" value="query.htm">
+   <input type="submit" name="-View" value="View Search 
+Page">
+   </form>
+Other tags that are required
+Any action tag
+
+=item -DBOpen
+
+Opens a database on the FileMaker host machine from 
+a remote browser.
+The -DBOpen and -DBClose actions tags only uses the 
+-db variable tag for the name of the database and the 
+partial path before FMPro? in the URL to determine on 
+which database to apply the action. The opening action 
+has the additional parameter -password specifying what 
+password to open the db with. The database administrator 
+must have remote administration privileges . The database 
+must be in the Web folder to be opened remotely. A format 
+file is required to be specified in the URL in order 
+for -DBOpen to be processed.
+Syntax example(s)
+Open a database with a URL
+HTTP://thehost.com/FMPro?-Db=Employees.fp5&-format=formatFile.htm&-DbOpen
+HTTP://thehost.com/FMPro?-Db=Employees.fp5&-format=formatFile.htm&-Password=secret&-DbOpen
+HTTP://thehost.com/joessite/ordering/FMPro?-Db=main.fp5&-format=formatFile.htm&-DbOpen
+Other tags that are required
+-DB, -format
+See also
+-DBClose
+
+=item -Delete
+
+Deletes the record specified by -RecID.
+The -RecID tag indicates which record should be deleted. 
+In order to delete a record, the Web user must have 
+Delete permission for the database.
+Syntax example(s)
+Delete a record using a link
+   <a href="FMPro?-DB=db.fp5&-Format=rslt.htm&-RecID=4&-Delete">Delete 
+record with ID 4</a>
+Delete a record using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="name.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="hidden" name="-RecID" value="[FMP-CurrentRecID]">
+   <input type="submit" name="-Delete" value="Delete This 
+Record">
+   </form>
+Other tags that are required
+-DB, -RecID
+See also
+[FMP-CurrentRecID]
+
+=item -Img
+
+Returns an image specified by -DB, -RecID, and a field 
+name, or specified by -DB and an image key.
+A Web user must have Browse permission in order to execute 
+this action. 
+An image key is a unique specifier to an image that 
+is in a FileMaker Pro database. Use the [FMP-Field] 
+tag to retrieve the image key from a container field.
+Images stored in formats other than JPEG or GIF are 
+converted before being sent to a Web user. 
+Important Usually there is no need to use this tag directly; 
+the [FMP-Image] tag can be used to generate the correct 
+URL for any container field. 
+Syntax example(s)
+Link to a page containing the image
+   <a href="FMPro?-DB=db.fp5&-RecID=11&pictures=&-Img">
+Display the picture from record ID 11 and field name 
+"pictures"</a>
+Display an image in a page by ID & field
+   <img src="FMPro?-DB=db.fp5&-RecID=[FMP-CurrentRecID]&pictures=&-Img">
+Display an image in a page by image key
+   <img src="FMPro?-DB=db.fp5&key=[FMP-Field:pictures,url]&-Img">
+Display an image the recommended way
+   <img src="[FMP-Image:pictures]">
+Other tags that are required
+-DB, -RecID, field name
+See also
+[FMP-Image], [FMP-CurrentRecID]
+
+=item -Dup
+
+Duplicates the record specified by -RecID.
+The -RecID tag indicates which record should be duplicated. 
+To duplicate a record, the Web user must have Create 
+permission for the database.
+Syntax example(s)
+Duplicate a record using a link
+   <a href="FMPro?-DB=db.fp5&-Format=rslt.htm&-RecID=6&-Dup">Duplicate 
+record with ID 6</a>
+Duplicate a record using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="name.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="hidden" name="-RecID" value="[FMP-CurrentRecID]">
+   <input type="submit" name="-Dup" value="Duplicate This 
+Record">
+   </form>
+Other tags that are required
+-DB, -RecID, - Format
+See also
+[FMP-CurrentRecID]
+
+=item -Edit
+
+Updates the record specified by -RecID by populating 
+the fields with the contents of any field name/value 
+pairs.
+The -RecID tag indicates which record should be edited. 
+In order to edit a record, the Web user must have Edit 
+permission for the database.
+Syntax example(s)
+Edit a record using a link
+   <a href="FMPro?-DB=db.fp5&-Format=rslt.htm&-RecID=13&Country=USA&-Edit">
+Change the country of record ID 13 to USA</a>
+Edit a record using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="names.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="hidden" name="-RecID" value="[FMP-CurrentRecID]">
+   <input type="text" size=12 name="Country" value="Type 
+a country name here">
+   <input type="submit" name="-Edit" value="Edit This Record">
+   </form>
+Other tags that are required
+-DB, -RecID, field name
+See also
+[FMP-CurrentRecID]
+
+=item [FMP-ElseIf]
+
+[FMP-ElseIf] is replaced with the specified data if 
+the conditions of the [FMP-If] statement are not met.
+Syntax example(s)
+Generate a greeting unique to the locale of the user
+[FMP-If: (Field:country.Eq.us).or.(Field:country.Eq.usa)]
+Welcome citizen!
+[FMP-ElseIf: Field:country.Eq.texas]
+Howdy, Pardner!
+[/FMP-If]
+Other tags that are required
+[FMP-If]
+See also
+[FMP-If]
+
+=item -ErrorFmtField
+
+Pulls error format file information from a field in 
+the database instead of an HTML file in the Web folder.
+Value is
+Field name that contains the HTML which will be used 
+to display the error message. 
+Syntax example(s)
+HTTP://thehost.com/FMPro?-Db=file.fp5&-ErrorFmtField=error+format+field
+&-Format=standardError.htm&-FindAny
+Notes
+If the field is a container field the field is empty 
+then the file specified in the -Format command will 
+be used instead.
+See also
+-Format, -FmtField, -MailFmtField
+
+=item -ErrNum
+
+-ErrNum takes either a range of error numbers or an 
+individual error number that triggers the use of the 
+format page specified in the -Error tag. Multiple -ErrNum 
+tag may be used to specify discontinuous ranges. If 
+no -ErrNum exists, then the current behavior is used. 
+Any error not listed in -ErrNum tags will be handled 
+by the default pages inside the Web Companion. Errors 
+related to finding and processing an -Error format page 
+will always be handle with the default pages.
+Value is
+Number value that you wish to trap for. 
+Syntax example(s)
+HTTP://thehost.com/FMPro?-Db=file.fp3&-RecId=2&fname=14&-Error=err.htm&
+-ErrNum=500-509&-Edit
+Other tags that are required
+-Error, -DB, any action tag
+See also
+-ErrorFmtField
+
+=item -Error
+
+Specifies the HTML format file to be used to generate 
+a response if any error occurs during the processing 
+of the action.
+In the page you specify with this tag, you can test 
+for which error occurred by using the [FMP-If] tag with 
+CurrentError as the first parameter, or you can simply 
+display the error number by using [FMP-CurrentError].
+Value is
+Path and name to the format file to use to display the 
+error message. 
+Syntax example(s)
+Attempt to create a new record using an HTML file, any 
+error takes you to the failure page
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="names.fp5">
+   <input type="hidden" name="-Format" value="success.htm">
+   <input type="hidden" name="-Error" value="failure.htm">
+   <input type="hidden" name="-RecID" value="[FMP-CurrentRecID]">
+   <input type="submit" name="-New" value="New Record">
+   </form>
+Other tags that are required
+-DB, any action tag
+See also
+-Format, [FMP-CurrentRecID], [FMP-If]
+
+=item [FMP-Field]
+
+[FMP-Field] is replaced with the contents of the specified 
+field.
+The layout specified by the -Lay tag that was part of 
+the request that created this page must contain the 
+fields to be displayed. Related fields cannot be used 
+if the -Lay tag was not specified.
+Syntax
+[FMP-Field: Field name , Encoding ]
+Parameter(s)
+First parameter: The name of the field
+Second parameter (optional): Encoding. Use one of the 
+following reserved words:
+Raw - Don't perform any encoding
+URL - Perform URL encoding
+HTML - (default) Perform HTML encoding 
+Break - Perform HTML encoding and replace soft returns 
+with <br>
+Syntax example(s)
+Create an editable area for field data using an HTML 
+file
+First Name: <input type="text" name="First Name" value="[FMP-Field: 
+First Name, Raw]">
+Return field data using an HTML file
+First Name: [FMP-Field: First Name]
+   <!-- After processing it could look like:
+First Name: John
+-->
+
+=item Field Name
+
+Field names are used to control find criteria or to 
+upload data to a record. This is not a tag.
+Usually the name portion of a name/value pair to be 
+processed by FileMaker Pro is either a CDML action or 
+variable tag. When a value for a specific field needs 
+to be sent to FileMaker Pro, the name portion of the 
+name/value pair is the name of a field in the FileMaker 
+Pro database. Field names used in this manner should 
+not start with the hyphen (-) character or contain any 
+period (.) characters.
+Name is
+Name of the field in the database.
+Value is
+For the -New and -Edit tags, the value contains the 
+data to be uploaded into a record. Multiple occurrences 
+of a field allow the data to be put into separate repetitions 
+of a repeating field.
+For the -Find tag, the value is a find request on the 
+specified field. 
+For the -Img tag, the first field name in the URL is 
+the name of the container field to retrieve the image 
+from. The value portion is ignored.
+For all other action tags, these name/value pairs are 
+not needed.
+Syntax example(s)
+Find a record using a link
+   <a href="FMPro?-DB=db.fp5&-Format=rslt.htm&color=red&-Max=1&-Find">Find 
+first red record</a>
+Edit a record using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="names.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="hidden" name="-RecID" value="[FMP-CurrentRecID]">
+   <input type="text" size=12 name="items" value="Enter 
+data for rep one">
+   <input type="text" size=12 name="items" value="Enter 
+data for rep two">
+   <input type="submit" name="-New" value="New Record">
+   </form>
+Other tags that are required
+-DB, any action tag
+
+=item [FMP-FieldName]
+
+[FMP-FieldName] is replaced with the name of the current 
+field when this tag is between the [FMP-LayoutFields] 
+and [/FMP-LayoutFields] tags.
+Syntax
+[FMP-FieldName: Encoding ]
+Parameter(s)
+First parameter (optional): Encoding. Use one of the 
+following reserved words:
+Raw - Don't perform any encoding
+URL - Perform URL encoding
+HTML - (default) Perform HTML encoding 
+Syntax example(s)
+Create a pop-up menu with all the fields on a layout, 
+using an HTML file
+   <select name="-SortField">
+   <option value="">-None- [FMP-LayoutFields]
+   <option>[FMP-FieldName: Raw] [/FMP-LayoutFields]
+   </select>
+   <!-- After processing, the HTML sent to the browser 
+could look like:
+   <select name="-SortField">
+   <option value="">-None-
+   <option>First Name
+   <option>Last Name
+   <option>Employee Number
+   </select>
+-->
+Other tags that are required
+[FMP-LayoutFields], [/FMP-LayoutFields]
+
+=item -FindAll
+
+Finds all records and displays them using the specified 
+format file.
+A Web user must have Browse permission in order to execute 
+this action. You can improve the perceived performance 
+of your Web database by using the -Max tag to limit 
+the number of records returned. 
+Syntax example(s)
+Find all records using a link
+   <a href="FMPro?-DB=db.fp5&-Format=rslt.htm&-Max=10&-FindAll">
+First 10 records in the database</a>
+Find all records using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="names.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="hidden" name="-Max" value="all">
+   <input type="submit" name="-FindAll" value="Find All 
+Records">
+   </form>
+Other tags that are required
+-DB, -Format
+See also
+-Max, -Skip
+
+=item -FindAny
+
+Performs a find for a single random record. A format 
+file is used to display the record found.
+A Web user must have Browse permission in order to execute 
+this action. 
+Syntax example(s)
+Find any one record using a link
+   <a href="FMPro?-DB=db.fp5&-Format=rslt.htm&-FindAny">Return 
+any record in the database</a>
+Find any one record using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="names.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="submit" name="-FindAny" value="Pick One!">
+   </form>
+Other tags that are required
+-DB, -Format
+
+=item [FMP-FindFieldItem]
+
+[FMP-FindFieldItem] is replaced with the field name 
+that was part of the find request that created this 
+page.
+[FMP-FindFieldItem] must be placed between the [FMP-CurrentFind] 
+and [/FMP-CurrentFind] tags.
+Syntax
+[FMP-FindFieldItem: Encoding ]
+Parameter(s)
+First parameter (optional): Encoding. Use one of the 
+following reserved words:
+Raw - Don't perform any encoding
+URL - Perform URL encoding
+HTML - (default) Perform HTML encoding 
+Syntax example(s)
+Return the current find criteria using an HTML file
+Current find request is:<br>
+[FMP-CurrentFind]
+Field: [FMP-FindFieldItem], Op: [FMP-FindOpItem] Value: 
+[FMP-FindValueItem]<br>
+[/FMP-CurrentFind]
+   <!-- After processing it could look like:
+Current find request is:
+Field: First Name, Op: begins with Value: Joe
+Field: Last Name, Op: equals Value: Doe
+-->
+Other tags that are required
+[FMP-CurrentFind], [/FMP-CurrentFind]
+See also
+[FMP-FindOpItem], [FMP-FindValueItem]
+
+=item [FMP-FindOpItem]
+
+[FMP-FindOpItem] is replaced with the search operator 
+that was part of the find request that created this 
+page.
+[FMP-FindOpItem] must be placed between the [FMP-CurrentFind] 
+and [/FMP-CurrentFind] tags.
+Syntax
+[FMP-FindOpItem: Format ]
+Parameter(s)
+First parameter (optional): Format. Use one of the following 
+reserved words:
+Short - Returns the find operator in short format (i.e: 
+bw, cn, eq, ...)
+Long - (default) Returns find operator in long format 
+(i.e. begins with, contains, equals, ...) 
+Display - Returns the find operator in the language 
+specified by the Web Companion Configuration
+Syntax example(s)
+Return the current find criteria using an HTML file
+Current find request is:<br>
+[FMP-CurrentFind]
+Field: [FMP-FindFieldItem], Op: [FMP-FindOpItem] Value: 
+[FMP-FindValueItem]<br>
+[/FMP-CurrentFind]
+   <!-- After processing it could look like:
+Current find request is:
+Field: First Name, Op: begins with Value: Joe
+Field: Last Name, Op: equals Value: Doe
+-->
+Other tags that are required
+[FMP-CurrentFind], [/FMP-CurrentFind]
+See also
+[FMP-FindFieldItem], [FMP-FindValueItem]
+
+=item -Find
+
+Submits a search request using defined criteria. A format 
+file is used to display the records found.
+A Web user must have Browse permission in order to execute 
+this action. You can improve the perceived performance 
+of your Web database by using the -Max tag to limit 
+the number of records returned. 
+Syntax example(s)
+Find a record using a link
+   <a href="FMPro?-DB=db.fp5&-Format=rslt.htm&country=USA&-Max=1&-Find">Find 
+first USA record</a>
+Find some records using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="names.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="hidden" name="-Max" value="all">
+   <input type="text" size=12 name="Country" value="USA">
+   <input type="submit" name="-Find" value="Find Records">
+   </form>
+Other tags that are required
+-DB, -Format, field name
+See also
+-Max, -Skip
+
+
+Table (2,3):
+=item [FMP-FindValueItem]
+
+[FMP-FindValueItem] is replaced with the value that 
+was part of the find request that created this page.
+[FMP-FindValueItem] must be placed between the [FMP-CurrentFind] 
+and [FMP-CurrentFind] tags.
+Syntax
+[FMP-FindValueItem: Encoding ]
+Parameter(s)
+First parameter (optional): Encoding. Use one of the 
+following reserved words:
+Raw - Don't perform any encoding
+URL - Perform URL encoding
+HTML - (default) Perform HTML encoding 
+Syntax example(s)
+Return the current find criteria using an HTML file
+Current find request is:<br>
+[FMP-CurrentFind]
+Field: [FMP-FindFieldItem], Op: [FMP-FindOpItem], Value: 
+[FMP-FindValueItem]<br>
+[/FMP-CurrentFind]
+   <!-- After processing it could look like:
+Current find request is:
+Field: First Name, Op: begins with, Value: Joe
+Field: Last Name, Op: equals, Value: Doe
+-->
+Other tags that are required
+[FMP-CurrentFind], [/FMP-CurrentFind]
+See also
+[FMP-FindFieldItem], [FMP-FindOpItem]
+
+=item -FmtField
+
+Pulls format file information from a field in the database 
+instead of an HTML file in the Web folder. 
+Value is
+Field name that contains the HTML which will be used 
+to display the error message. 
+Syntax example(s)
+HTTP://thehost.com/FMPro?-Db=file.fp5&-FmtField=error+format+field&-Format=standardError.htm&-FindAny
+Notes
+If the field is a container field, or the field is empty 
+then the file specified in the -Format command will 
+be used instead.
+See also
+-Format, -FmtField, -MailFmtField
+
+=item -MailFmtField
+
+Specifies a field from which a format file can be used 
+for the body of the email message instead of a file 
+in the Web folder.
+The format file can contain CDML replacement tags.
+Value is
+A text file to send as the body of the message.
+Syntax example(s)
+Send mail using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="contacts.fp5">
+   <input type="hidden" name="-Format" value="displaypage.html">
+   <input type="text" name="-MailTo" value="Keith@Company.COM">
+   <input type="text" name="-MailCC" value="Dirk@Company.COM">
+   <input type="text" name="-MailBCC" value="Terry@Company.COM">
+   <input type="text" name="-MailFrom" value="Chris@Company.COM">
+   <input type="text" name="-MailSub" value="The Subject">
+   <input type="hidden" name="-MailHost" value="SMTP.Company.COM">
+   <input type="hidden" name="-MailFmtFIeld" value="mail 
+format field">
+   <input type="submit" name="-View" value="Send Message">
+   </form>
+Other tags that are required
+-DB, -MailTo, -MailFrom, -MailSub, -MailHost, any action 
+tag
+See also
+-MailCC, -MailBCC
+
+=item -Format
+
+Specifies the HTML format file used to generate a successful 
+response during the processing of the action.
+Value is
+Path and name to the format file to use to display the 
+response. 
+Syntax example(s)
+Find any one record using a link, and display that record 
+in "results.htm"
+   <a href="FMPro?-DB=db.fp5&-Format=results.htm&-FindAny">Return 
+any record in the database</a>
+Find any one record using a form action, and display 
+that record in "results.htm"
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="names.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="submit" name="-FindAny" value="Pick One!">
+   </form>
+Other tags that are required
+-DB, any action tag
+See also
+-Error
+
+=item -MailFormat
+
+Specifies a text format file used for the body of the 
+email message.
+This format file can contain CDML replacement tags.
+Value is
+A text file to send as the body of the message.
+Syntax example(s)
+Send mail using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="contacts.fp5">
+   <input type="hidden" name="-Format" value="displaypage.html">
+   <input type="text" name="-MailTo" value="Keith@Company.COM">
+   <input type="text" name="-MailCC" value="Dirk@Company.COM">
+   <input type="text" name="-MailBCC" value="Terry@Company.COM">
+   <input type="text" name="-MailFrom" value="Chris@Company.COM">
+   <input type="text" name="-MailSub" value="The Subject">
+   <input type="hidden" name="-MailHost" value="SMTP.Company.COM">
+   <input type="hidden" name="-MailFormat" value="mail.txt">
+   <input type="submit" name="-View" value="Send Message">
+   </form>
+Other tags that are required
+-DB, -MailTo, -MailFrom, -MailSub, -MailHost, any action 
+tag
+See also
+-MailCC, -MailBCC
+
+=item -MailFrom
+
+Specifies the email address of the person who is sending 
+the message.
+Value is
+An email address.
+Syntax example(s)
+Send mail using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="contacts.fp5">
+   <input type="hidden" name="-Format" value="displaypage.html">
+   <input type="text" name="-MailTo" value="Keith@Company.COM">
+   <input type="text" name="-MailCC" value="Dirk@Company.COM">
+   <input type="text" name="-MailBCC" value="Terry@Company.COM">
+   <input type="text" name="-MailFrom" value="Chris@Company.COM">
+   <input type="text" name="-MailSub" value="The Subject">
+   <input type="hidden" name="-MailHost" value="SMTP.Company.COM">
+   <input type="hidden" name="-MailFormat" value="mail.txt">
+   <input type="submit" name="-View" value="Send Message">
+   </form>
+Other tags that are required
+-DB, -MailTo, -MailSub, -MailHost, -MailFormat, any 
+action tag
+See also
+-MailCC, -MailBCC
+
+=item [FMP-Header]
+
+The HTTP header of the page sent to the browser is replaced 
+with the text between the [FMP-Header] and [/FMP-Header] 
+tags. None of the text between the tags will appear 
+in the HTML portion of the page.
+The [FMP-Header] tag must be placed before the [FMP-ContentMimeType] 
+and [FMP-SetCookie] tags in order for them to function 
+properly. The [FMP-Header] tag will replace the current 
+header entirely. Since these tags modify the header, 
+their position is important.
+One example of the use of a header would be to redirect 
+a browser to a different HTTP server instead of displaying 
+the formatted page. Consult RFC 2068, Hypertext Transfer 
+Protocol -- HTTP/1.1 for more information about HTTP 
+headers.
+Syntax example(s)
+Direct the user's browser to the FileMaker home page 
+after processing the request
+[FMP-Header]
+HTTP/1.0 302 Moved Temporary
+Location: http://www.FileMaker.com
+[/FMP-Header]
+Other tags that are required
+[/FMP-Header]
+
+=item -MailHost
+
+Specifies the address of the SMTP server host that will 
+actually send the message.
+Value is
+Name or IP address of an SMTP mail host.
+Syntax example(s)
+Send mail using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="contacts.fp5">
+   <input type="hidden" name="-Format" value="displaypage.html">
+   <input type="text" name="-MailTo" value="Keith@Company.COM">
+   <input type="text" name="-MailCC" value="Dirk@Company.COM">
+   <input type="text" name="-MailBCC" value="Terry@Company.COM">
+   <input type="text" name="-MailFrom" value="Chris@Company.COM">
+   <input type="text" name="-MailSub" value="The Subject">
+   <input type="hidden" name="-MailHost" value="SMTP.Company.COM">
+   <input type="hidden" name="-MailFormat" value="mail.txt">
+   <input type="submit" name="-View" value="Send Message">
+   </form>
+Other tags that are required
+-DB, -MailTo, -MailFrom, -MailSub, -MailFormat, any 
+action tag
+See also
+-MailCC, -MailBCC
+
+=item [FMP-If]
+
+Along with the [FM-Else] and [/FMP-If] tags, the [FMP-If] 
+tag controls what HTML is shown by the browser. The 
+[FMP-Else] tag is optional.
+Syntax
+[FMP-If: LeftSide Operator RightSide ]
+...HTML if condition is true...
+[FMP-Else] 
+...HTML if condition is false...
+[/FMP-If]
+Parameter(s)
+First parameter: The left side of the operator. Can 
+be one of the following reserved words:
+Boolean comparisons
+CanDelete - Do password privileges allow for deleting 
+records?
+CanEdit - Do password privileges allow for editing records?
+CanNew - Do password privileges allow creation of new 
+records?
+IsSorted - Is the database currently sorted?
+Numeric comparisons
+CurrentError - Returns the current error number. See 
+FileMaker Pro error code numbers, in the develop guide 
+section of this database, for possible values
+CurrentFoundCount - Returns how many records are in 
+the found set
+CurrentMax - Returns the current -Max value, which describes 
+how many records should be shown
+CurrentRecordCount - Returns how many records are in 
+the database
+CurrentRecordNumber - Returns the current record number
+CurrentSkip - Returns how many records were skipped 
+to the beginning of the range
+RangeEnd - Returns the record number of the last record 
+in the range
+RangeSize - Returns the number of records that were 
+actually shown in the range
+RangeStart - Returns the record number of the first 
+record in the range
+Text comparisons
+ClientPassword - Returns the client's password
+ClientType - Returns the type of browser the Web user 
+is using
+ClientUsername - Returns the client's user name as typed 
+in by the Web user in the authentication dialog box
+CurrentAction - Returns the current action (e.g.: Delete, 
+New)
+CurrentCookie: Cookie Name - Returns the value of the 
+named cookie
+CurrentDatabase - Returns the current database name
+CurrentFormat - Returns the name of the current format 
+file
+CurrentLayout - Returns the current layout name
+CurrentToken - Returns the current token value 
+Text or numeric comparisons depending on field type
+Field: Field Name - Name of a field to compare with
+Value list comparisons
+ValueListItem - Returns the current value list item
+Date/time comparisons
+CurrentDate - Returns the current date in short format
+CurrentDay - Returns the current day name in short format
+CurrentTime - Returns the current time in short format
+Address comparisons
+ClientAddress - Returns the domain address
+ClientIP - Returns the IP address
+Second parameter: The comparison operator 
+.eq. - equals 
+.neq. - not equal to
+.gt. - greater than 
+.gte. - greater than or equal to
+.lt. - less then 
+.lte. - less than or equal to
+.cn. - contains
+.ncn. - does not contain
+Third parameter: The right side of the operator, depends 
+on the comparison type of the left side.
+Boolean comparisons (only with .eq. and .neq. operators)
+False
+True
+Numeric comparisons (only with eq, neq, gt, gte, lt, 
+lte)
+Field: Field Name - Name of a field to compare with, 
+should be a number
+Literal Numeric Value - A number
+Text comparisons (all operators allowed)
+Field: Field Name - Name of a field to compare with
+Literal Value - Any literal text that does not contain 
+a ] character (right square bracket) 
+Value list comparisons (all operators, except for Checked, 
+which can only use eq)
+Checked - Used with .eq. to test if the value list item 
+should be checked
+Field: Field Name - Name of a field to compare with
+Literal Value - Any literal text that does not contain 
+a ] character (right square bracket) 
+Date/time comparisons (only with eq, neq, gt, gte, lt, 
+lte)
+Literal Value - Proper date, day, or time literal in 
+current OS's format
+Address comparisons (only with eq)
+List of Literal Value - list of address or IP numbers, 
+with wild cards if wanted, separated by commas
+Notes about literal values:
+ï¿½ If specifying a literal value, FileMaker Pro treats 
+everything from the end of the operator to the closing 
+right square bracket (minus leading and trailing blanks) 
+as the comparison value. 
+ï¿½ Don't enclose literal values in quotes. If you include 
+quotes, they're treated as part of the comparison value.
+ï¿½ Literal values are not case-sensitive and can include 
+spaces within text or number values. 
+Syntax example(s)
+Boolean example
+Decide which HTML to send:
+[FMP-If: CanDelete .eq. True]
+Show the delete button...
+[/FMP-If]
+Address example
+[FMP-If: ClientAddress .eq. keith.company.com]
+Hi, Keith!
+[/FMP-If]
+Text example
+[FMP-If: CurrentAction .eq. Delete]
+[include: filename.htm]
+[FMP-Else] 
+[include: anotherFile.htm]
+[/FMP-If]
+[FMP-If: First Name .eq. field: Nick Name]
+How boring, your nick name is the same as your name.
+[/FMP-If]
+[FMP-If: ClientUserName .neq.]
+Everyone who has entered a user name will see this message.
+[/FMP-If]
+
+=item [FMP-Image]
+
+[FMP-Image] is replaced with an image URL pointing to 
+the picture in the specified field. 
+Usually used inside the HTML image (<img>) tag or anchor 
+(<a>) tag as the URL to the picture.
+Syntax
+[FMP-Image: Field name ]
+Parameter(s)
+First parameter: The name of a container field
+Syntax example(s)
+Display a picture using an HTML file
+   <img src="[FMP-Image: pictures]">
+Link to a picture using an HTML file
+   <a href="[FMP-Image: pictures]">View the image!</a>
+See also
+-Img
+
+=item [FMP-Include]
+
+[FMP-Include] is replaced with the contents of another 
+file, usually an HTML format file.
+Syntax
+[FMP-Include: Filename ]
+Parameter(s)
+First parameter: Name of the file to include.
+Syntax example(s)
+Include a file using an HTML file
+[FMP-If: CurrentError .eq. 509]
+[FMP-Include: requirefield.htm]
+[FMP-Else]
+[FMP-Include: othererror.htm]
+[/FMP-If]
+
+=item [FMP-IncludeField]
+
+[FMP-IncludeField] is replaced with the contents of 
+a field, usually a text field that contains an HTML 
+format file.
+Syntax
+[FMP-IncludeField: Fieldname ]
+Parameter(s)
+First parameter: Name of the field to include.
+Syntax example(s)
+Include a file using an HTML file
+[FMP-If: firstName .neq. "bob" ]
+[FMP-IncludeField: errorPage]
+[FMP-Else]
+[FMP-IncludeField: otherErrorPage]
+[/FMP-If]
+
+=item [FMP-InlineAction]
+
+[FMP-InlineAction] allows the processing of multiple 
+CDML requests during the processing of a single format 
+file. The [FMP-InlineAction] tag takes as its parameters 
+the URL-like format of the name value pairs for a CDML 
+request. All further processing of the format file then 
+continues as if the inline request started the processing.
+When the [/FMP-InlineAction] is processed the request 
+that was in effect previously is restored. Any -Format 
+tags are ignored in the request. [FMP-CurrentError] 
+contains the error result number of the last [FMP-InlineAction]. 
+Any FMP-ContentMIMEType or FMP-Header tags inside any 
+[FMP-InlineAction] tags are processed as if they were 
+not inside any [FMP-InlineAction] tags.
+Syntax
+[FMP-InlineAction: Intratags ]
+Parameter(s)
+First parameter: Intratags{intratag parameter}
+Syntax example(s)
+   <!-- List the employees named Doe in the current database 
+-->
+[FMP-InlineAction: -db={CurrentDatabase}, -lay={CurrentLayout}, 
+last name="doe", position="Software Engineer", -find] 
+[FMP-Field: first name] [FMP-Field: last name] [/FMP-InlineAction]
+   <!-- Send a mail message if a cookie was never set -->
+[FMP-If: CurrentCookie: hasseen .ne. yes] 
+[FMP-InlineAction: -db=dbname, -mailto=admin@ab.ca, 
+-mailfrom=webserver@ab.ca,
+-mailsub=New User, -mailhost=17.17.17.17, -mailformat=newuser.txt, 
+-view]
+[/FMP-InlineAction]
+[/FMP-If]
+   <!-- Log page hits in another database -->
+[FMP-InlineAction: -db=log.fp5, -lay=web, time="{CurrentTime}", 
+date="{CurrentDate}",
+page="This page!", browser="{ClientType}", ip="{ClientIP}", 
+-new]
+[/FMP-InlineAction]
+
+=item [FMP-LayoutFields]
+
+Repeats the HTML between [FMP-LayoutFields] and [/FMP-LayoutFields] 
+for all the fields on the layout specified by the -Lay 
+tag that was part of the request that created this page.
+Syntax example(s)
+Create a pop-up menu with all the fields on a layout, 
+using an HTML file
+   <select name="-SortField">
+   <option value="">-None- [FMP-LayoutFields]
+   <option>[FMP-FieldName: Raw] [/FMP-LayoutFields]
+   </select>
+   <!-- After processing, the HTML sent to the browser 
+could look like:
+   <select name="-SortField">
+   <option value="">-None-
+   <option>First Name
+   <option>Last Name
+   <option>Employee Number
+   </select>
+-->
+Other tags that are required
+[/FMP-LayoutFields] 
+See also
+-Lay, [FMP-FieldName]
+
+=item -Lay
+
+Specifies the name of the layout that is used to control 
+which fields are available and how they are displayed.
+The layout is used to: bind value lists to fields, control 
+which fields are available to be displayed, allow access 
+to related data, set the number of repetitions displayed 
+in a repeating field, and control which fields are listed 
+by the [FMP-LayoutFields] tag.
+Value is
+Name of the layout to use. If no layout is given, then 
+the layout is considered to contain all fields in the 
+database (but not related fields).
+Syntax example(s)
+Find any one record using a link
+   <a href="FMPro?-DB=db.fp5&-Format=rslt.htm&-Lay=Layout+One&-FindAny">Return 
+any record in the database</a>
+Find any one record using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="names.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="hidden" name="-Lay" value="Layout One">
+   <input type="submit" name="-FindAny" value="Pick One!">
+   </form>
+Other tags that are required
+-DB, any action tag
+
+=item [FMP-Link]
+
+[FMP-Link] is replaced with a URL that points to the 
+page it is on. The parameters can be used to remove 
+portions of the URL it generates.
+The link that is generated includes all the find and 
+sort criteria that was used to generate the page this 
+tag is on. This tag is a shortcut to the following series 
+of CDML tags:
+FMPro?-db=[FMP-CurrentDatabase]&
+-format=[FMP-CurrentFormat]&
+-lay=[FMP-CurrentLayout]&
+[FMP-CurrentSort]
+-sortfield=[FMP-SortFieldItem]&-sortorder=[FMP-SortOrderItem]&
+[/FMP-CurrentSort]
+[FMP-CurrentFind]
+-op=[FMP-FindOpItem]&[FMP-FindFieldNameItem]=[FMP-FindFieldValueItem]&
+[/FMP-CurrentFind]
+-lop=[FMP-CurrentLOP]&
+-max=[FMP-CurrentMax]&
+-skip=[FMP-CurrentSkip]&
+-token=[FMP-CurrentToken]&
+-[FMP-CurrentAction]
+Syntax
+[FMP-Link: CharacterCodes ]
+Parameter(s)
+First parameter: A series of letters, in any order, 
+representing the parts of the URL to omit.
+d - omit database section of the url
+r - omit format file section of the url
+l - omit layout section of the url
+s - omit sort criteria section of the url
+f - omit find criteria section of the url
+m - omit max section of the url
+k - omit skip section of the url
+t - omit token section of the url
+a - omit action section of the url
+Syntax example(s)
+Change to a page using all the same criteria except 
+for the format file, using a link
+   <a href="[FMP-Link: ra]&-Format=AltHitList.htm&-Find">
+Alternate hit list</a>
+   <!-- After processing, the HTML sent to the browser 
+could look like:
+   <a href="FMPro?-db=curdb.fp5&-lay=list&-sortfield=size&-sortorder=descend&
+-op=eq&color=red&-max=10&-skip=15&-token=CD1343&-Format=AltHitList.htm&-Find">
+Alternate hit list</a>
+-->
+
+=item [FMP-LinkFirst]
+
+The HTML between [FMP-LinkFirst] and [/FMP-LinkFirst] 
+is replaced with a link to the first range of records 
+based on the -Max value used to create the current page.
+The link that is generated includes all the search and 
+sort criteria that was used to generate the page this 
+tag was on. The text between the two tags is not displayed 
+if the first record is being displayed.
+Syntax example(s)
+Display first set of records using an HTML file
+[FMP-LinkFirst]First set of records.[/FMP-LinkFirst]
+See also
+-Max, [FMP-LinkNext], [FMP-LinkLast], [FMP-LinkPrevious]
+
+=item [FMP-LinkLast]
+
+The HTML between [FMP-LinkLast] and [/FMP-LinkLast] 
+is replaced with a link to the last range of records 
+based on the -Max value used to create the current page.
+The link that is generated includes all the search and 
+sort criteria that was used to generate the page this 
+tag was on. The text between the two tags is not displayed 
+if the last record is being displayed.
+Syntax example(s)
+Display the last set of records using an HTML file
+[FMP-LinkLast]Last set of records.[/FMP-LinkLast]
+See also
+-Max, [FMP-LinkFirst], [FMP-LinkNext], [FMP-LinkPrevious]
+
+=item [FMP-LinkNext]
+
+The HTML between [FMP-LinkNext] and [/FMP-LinkNext] 
+is replaced with a link to the next range of records 
+based on the -Max and -Skip values used to create the 
+current page.
+The link that is generated includes all the search and 
+sort criteria that was used to generate the page this 
+tag was on. The text between the two tags is not displayed 
+if the last record in the found set is being displayed.
+Syntax example(s)
+Display the next set of records using an HTML file
+[FMP-LinkNext]Next set of records[/FMP-LinkNext]
+See also
+-Max, -Skip, [FMP-LinkFirst], [FMP-LinkLast], [FMP-LinkPrevious]
+
+=item [FMP-LinkPrevious]
+
+The HTML between [FMP-LinkPrevious] and [/FMP-LinkPrevious] 
+is replaced with a link to the previous range records 
+based on the -Max and -Skip value used to create the 
+current page.
+The link that is generated includes all the search and 
+sort criteria that was used to generate the page this 
+tag was on. The text between the two tags is not displayed 
+if the first record in a found set is being displayed.
+Syntax example(s)
+Display the previous set of records using an HTML file
+[FMP-LinkPrevious]Previous set of records[/FMP-LinkPrevious]
+See also
+-Max, -Skip, [FMP-LinkFirst], [FMP-LinkLast], [FMP-LinkNext]
+
+=item [FMP-LinkRecID]
+
+[FMP-LinkRecID] is replaced with a URL to a specific 
+record in a database.
+The link that is generated includes all the search and 
+sort criteria that was used to generate the page this 
+tag was on. 
+Syntax
+[FMP-LinkRecID: Format=Pathname , Layout=Layout Name 
+]
+Parameter(s)
+First parameter: Path to the format file to use in the 
+link.
+Second parameter (optional): Name of a layout to use 
+in the link.
+Syntax example(s)
+Display a specific record using a link
+   <a href="[FMP-LinkRecID: format=Detail.htm, layout=detail]">
+More detail</a>
+   <!-- After processing, the HTML sent to the browser 
+could look like:
+   <a href="FMPro?-db=curdb.fp5&-format=Detail.htm&-lay=detail&-recid=0A&-find">
+More detail</a>
+-->
+
+=item [FMP-Log]
+
+[FMP-Log] is replaced with the text specified as the 
+parameter and written to the info log file.
+Syntax
+[FMP-Log: someText ]
+Parameter(s)
+The text you want written into the info log file.
+Syntax example(s)
+Put some text in the info log file 
+[FMP-Log: the search.htm page was accessed]
+
+=item -LOP
+
+Combines the find criteria as an AND or OR find request.
+Value is
+Either AND or OR. If the -LOP variable tag is not used, 
+then the find request is assumed to be an AND request.
+Syntax example(s)
+Find a record using a link
+   <a href="FMPro?-DB=db.fp5&-Format=rslt.htm&Country=USA+UK&-LOP=or&-Find">Find 
+United states of America or United Kingdom records</a>
+Find some records using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="names.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="hidden" name="-LOP" value="OR">
+Enter a country and click Find to see the results.<br>
+   <input type="text" size=12 name="Country" value="USA 
+UK">
+   <input type="submit" name="-Find" value="Find">
+   </form>
+Other tags that are required
+-DB, -Find, -Format, field name
+See also
+-Op
+
+=item -Max
+
+Specifies the maximum number of records that should 
+be returned per page.
+Value is
+A number from 1 thru 2147483647, or the word "All". 
+The default value is 25.
+Syntax example(s)
+Specify the maximum number of records using a link
+   <a href="FMPro?-DB=Contacts&-Format=format.html&-Max=10&-FindAll">First 
+10 Records</a>
+Specify the maximum number of records using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="contacts.fp5">
+   <input type="hidden" name="-Format" value="format.html">
+   <input type="hidden" name="-Max" value="10">
+   <input type="submit" name="-FindAll" value="First 10 
+Records">
+   </form>
+Other tags that are required
+-DB, -Format, -Find or -FindAll
+See also
+-Skip
+
+=item -ModID
+
+Used to detect record modification collisions in -Edit 
+requests. If the ID does not match, error code 306 (Record 
+modification ID does not match) is returned.
+Value is
+An email address.
+Syntax example(s)
+Make sure when updating the country, no one else changed 
+it 
+   <FORM ACTION="FMPro" METHOD="POST">
+   <INPUT TYPE="HIDDEN" NAME="-DB" VALUE="names.fp5">
+   <INPUT TYPE="HIDDEN" NAME="-Format" VALUE="results.htm">
+   <INPUT TYPE="HIDDEN" NAME="-RecID" VALUE="[FMP-CurrentRecID]">
+   <INPUT TYPE="HIDDEN" NAME="-ModID" VALUE="[FMP-CurrentModID]">
+   <INPUT TYPE="TEXT" NAME="Country">
+   <INPUT TYPE="SUBMIT" NAME="-Edit" VALUE="Edit This Record">
+   </FORM>
+Other tags that are required
+-Edit, [FMP-CurrentRecordID]
+See also
+[FMP-CurrentRecordID], [FMP-CurrentModID]
+
+
+Table (2,3):
+=item -New
+
+Creates a new record and populates that record with 
+the contents of any field name/value pairs.
+A Web user must have Create permission in order to execute 
+this action.
+Syntax example(s)
+Create a new record using a link
+   <a href="FMPro?-DB=db.fp5&-Format=rslt.htm&Country=Australia&-New">
+Create a record for Australia</a>
+Create a new record using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="names.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="text" size=12 name="Country" value="Australia">
+   <input type="submit" name="-New" value="New Record">
+   </form>
+Other tags that are required
+-DB, field name
+
+=item -Op
+
+Specifies the comparison operator to apply to the field 
+name/value pair that follows it in a -Find action.
+Value is
+The operator to use. There are short and long versions 
+of each operator. The default operator is "begins with". 
+The list of valid operators is:
+Short Long FileMaker Pro Equivalent Operator
+eq equals =word
+cn contains "word"
+bw begins with word*
+ew ends with *word
+gt greater than > word
+gte greater than or equals >= word
+lt less than < word
+lte less than or equals <= word
+neq not equals omit, word
+You can use any FileMaker Pro Find operator by specifying 
+the begins with (bw) parameter. E.g., To specify the 
+"Find Content Match" (==) operator, you would specify 
+the begins with parameter (bw) and then you would place 
+the characters "==" before the actual search criteria. 
+The required lines would look like this:
+   <input type="hidden" name="-Op" value="bw">
+   <input type="text" name="First" value="==Keith">
+Syntax example(s)
+Specify an operator using a link
+   <a href="-DB=Contacts&-Format=format.html&-Op=eq&First=Bob&-Find">Find 
+Bob but not Bobbie</a>
+Specify an operator using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="contacts.fp5">
+   <input type="hidden" name="-Format" value="format.html">
+   <input type="hidden" name="-Op" value="eq">
+   <input type="text" name="First" value="Bob">
+   <input type="submit" name="-Find" value="Find Bob">
+   </form>
+Other tags that are required
+-DB, -Format, field name, -Find
+See also
+-LOP
+
+=item [FMP-Option]
+
+[FMP-Option] is replaced with all the values in the 
+value list of the field in that layout.
+Syntax
+[FMP-Option: Field Name , List=Value List Name ]
+Parameter(s)
+First parameter: Name of a field that the value list 
+is associated with.
+Second parameter (optional): Name of a value list to 
+use, the default is to use the value list associated 
+with the field on the specified layout.
+Syntax example(s)
+Display a pop-up menu with value list using an HTML 
+file
+   <select name="Groups">
+[FMP-option: Groups, list=GroupList]
+   </select>
+   <!-- After processing, the HTML sent to the browser 
+could look like:
+   <select name="Groups">
+   <option> Production
+   <option selected> Sales
+   <option> Support
+   </select>
+-->
+Other tags that are required
+-Lay (required if you haven't specified a list), <select>, 
+   </select>
+See also
+[FMP-ValueList]
+
+=item -Script
+
+Specifies the FileMaker Pro script that should be performed 
+after the finding and sorting of records (if any) during 
+processing of the action.
+Value is
+Name of the script to perform. 
+Syntax example(s)
+Perform a script using a link
+   <a href="FMPro?-DB=db.fp5&-Format=rslt.htm&-Script=Omit+Script&-FindAll">"Run 
+script"</a>
+Perform a script using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="names.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="hidden" name="-Script" value="Omit Script">
+   <input type="submit" name="-FindAll" value="Run Script">
+   </form>
+Other tags that are required
+-DB, any action tag
+See also
+-Script.PreFind, -Script.PreSort
+
+=item -Script.PreFind
+
+Specifies the FileMaker Pro script that should be performed 
+before the finding and sorting of records (if any) during 
+processing of the action.
+Value is
+Name of the script to perform. 
+Syntax example(s)
+Perform a script using a link
+   <a href="FMPro?-DB=db.fp5&-Format=rslt.htm&-Script.PreFind=My+Script&-FindAll">Run 
+script</a>
+Perform a script using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="names.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="hidden" name="-Script.PreFind" value="DelSome">
+   <input type="submit" name="-FindAll" value="Run Script">
+   </form>
+Other tags that are required
+-DB, any action tag
+See also
+-Script, -Script.PreSort
+
+=item -Script.PreSort
+
+Specifies the FileMaker Pro script that should be performed 
+after the finding and before the sorting of records 
+(if any) during processing of the action.
+Value is
+Name of the script to perform. 
+Syntax example(s)
+Perform a script using a link
+   <a href="FMPro?-DB=db.fp5&-Format=rslt.htm&-Script.PreSort=OmitOne&-FindAll">Run 
+script</a>
+Perform a script using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="names.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="hidden" name="-Script.PreSort" value="OmitOne">
+   <input type="submit" name="-FindAll" value="Run Script">
+   </form>
+Other tags that are required
+-DB, any action tag
+See also
+-Script, -Script.PreFind
+
+=item Select
+
+An HTML input type. Used by a browser to display a pop-up 
+menu.
+This is not a FileMaker Pro tag, This is standard HTML.
+Do not include calculation or summary field types on 
+add or update format files as data can't be entered 
+into these field types.
+Syntax
+   <select name="Field">
+   <option value="Data" Selected>Visible Value
+   </select>
+Field - The name of the field that you want the data 
+to go into.
+Data - The information that should be placed into the 
+field.
+Selected (optional) - Specifies that the menu item is 
+selected. If the word "selected" is not present, the 
+menu item is not selected.
+Visible Value - The value that the user sees in the 
+browser.
+Syntax example(s)
+Display a pop-up menu using an HTML file
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="db.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <select name="Country">
+   <option value="F1" selected>France
+   <option value="G7">Germany
+   <option value="I4">Iceland
+   <option value="U2">USA
+   </select>
+   <input type="submit" name="-New" value="New Record">
+   </form>
+
+=item [FMP-Portal]
+
+Repeats the HTML between [FMP-Portal] and [/FMP-Portal] 
+for each record in a specified portal. 
+The layout specified by the -Lay tag that was part of 
+the request that created this page must contain fields 
+specified by the relationship in this tag. This tag 
+cannot be used if the -Lay tag was not specified.
+Syntax
+[FMP-Portal: Relationship name ]
+Parameter(s)
+First parameter: Name of the relationship to repeat 
+over.
+Syntax example(s)
+Display a portal using an HTML file
+[FMP-Portal: InvoiceID]
+[FMP-Field: InvoiceID::Product Name] - [FMP-Field: InvoiceID::Product 
+Count]<br>
+[/FMP-Portal]
+   <!-- After processing it could look like:
+Blue Cubes - 4
+Red Triangles - 6
+Green Spheres - 2
+-->
+Other tags that are required
+[/FMP-Portal] 
+
+=item Radio
+
+An HTML input type. Used by a browser to display a radio 
+buttons.
+This is not a FileMaker Pro tag, This is standard HTML.
+Do not include calculation or summary field types on 
+add or update format files as data can't be entered 
+into these field types.
+Syntax
+   <input type="radio" name="Field" value="Data" Checked>Radio 
+Button Label
+Field - The name of the field that you want the data 
+to go into.
+Data - The information that should be placed into the 
+field.
+Checked (optional) - Specifies that the radio button 
+is selected. If the word "checked" is not present, the 
+radio button is not selected.
+Radio Button Label - The label that the user sees in 
+the browser.
+Syntax example(s)
+Display radio buttons using an HTML file
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="db.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="radio" name="Country" value="F1">France
+   <input type="radio" name="Country" value="G7" checked>Germany
+   <input type="radio" name="Country" value="I4" checked>Iceland
+   <input type="radio" name="Country" value="U2">USA
+   <input type="submit" name="-New" value="New Record">
+   </form>
+
+=item [FMP-RangeEnd]
+
+[FMP-RangeEnd] is replaced with the record number of 
+the last record being displayed.
+Syntax example(s)
+Display the record number of the last record in the 
+range using an HTML file
+Records [FMP-RangeStart] through [FMP-RangeEnd] of [FMP-CurrentFoundCount]
+   <!-- After processing it could look like:
+Records 6 through 10 of 34
+-->
+See also
+[FMP-RangeStart]
+
+=item [FMP-RangeSize]
+
+[FMP-RangeSize] is replaced with the number of records 
+actually displayed on this page.
+Usually this is equal to [FMP-CurrentMax] except in 
+the case when you are at the end of the record list 
+and -Max records are not available.
+Syntax example(s)
+Display the current number of records being viewed using 
+an HTML file
+You are viewing [FMP-RangeSize] records.
+   <!-- After processing it could look like:
+You are viewing 8 records.
+-->
+See also
+-Max
+
+=item [FMP-RangeStart]
+
+[FMP-RangeStart] is replaced with the record number 
+of the first record being displayed.
+Syntax example(s)
+Display the record number of the first record being 
+displayed using an HTML file
+Records [FMP-RangeStart] through [FMP-RangeEnd] of [FMP-CurrentFoundCount]
+   <!-- After processing it could look like:
+Records 6 through 10 of 34
+-->
+See also
+[FMP-RangeEnd]
+
+=item [FMP-Record]
+
+Repeats the HTML between [FMP-Record] and [/FMP-Record] 
+for every record up to -Max, starting after skipping 
+-Skip records.
+Syntax example(s)
+Display several records using an HTML file
+[FMP-Record]
+[FMP-Field: Country] - [FMP-Field: Capital]<br>
+[/FMP-Record]
+   <!-- After processing it could look like:
+Great Britain - London
+France - Paris
+USA - Washington D.C.
+-->
+Other tags that are required
+[/FMP-Record] 
+See also
+-Max, -Skip
+
+=item -RecID
+
+Defines which record should be operated on. Used mainly 
+by the -Edit, -Dup (duplicate), and -Delete actions.
+Value is
+A record ID, which is a unique specifier to a record 
+in a FileMaker Pro database. The [FMP-CurrentRecID] 
+replacement tag is used to get the ID of a record.
+Syntax example(s)
+Delete a record using a link
+   <a href="FMPro?-DB=db.fp5&-Format=rslt.htm&-RecID=4&-Delete">Delete 
+record with ID 4</a>
+Delete a record using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="name.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="hidden" name="-RecID" value="[FMP-CurrentRecID]">
+   <input type="submit" name="-Delete" value="Delete This 
+Record">
+   </form>
+Other tags that are required
+-DB, -Format, any action tag
+See also
+[FMP-CurrentRecID]
+
+=item [FMP-Repeating]
+
+Repeats the HTML between [FMP-Repeating] and [/FMP-Repeating] 
+for all the repetitions of the specified field. The 
+tag [FMP-RepeatingItem] is replaced with the contents 
+of a specific repetition.
+Repeating fields within portals are not supported. The 
+number of repetitions displayed in a repeating field 
+is controlled by the layout specified in the -Lay tag.
+Syntax
+[FMP-Repeating: Field Name ]
+Parameter(s)
+First parameter: Name of the repeating field.
+Syntax example(s)
+Display a repeating field using an HTML file
+[FMP-Repeating: Extensions]
+Alternate phone extensions: [FMP-RepeatingItem]<br>
+[/FMP-Repeating]
+   <!-- After processing it could look like:
+Alternate phone extensions: x2353
+Alternate phone extensions: x3442
+-->
+Other tags that are required
+-DB, [/FMP-Repeating] 
+See also
+[FMP-RepeatingItem]
+
+=item [FMP-RepeatingItem]
+
+[FMP-RepeatingItem] is replaced with the contents of 
+the next repetition.
+Syntax
+[FMP-RepeatingItem: Encoding ]
+Parameter(s)
+First parameter (optional): Encoding. Use one of the 
+following reserved words:
+Raw - Don't perform any encoding
+URL - Perform URL encoding
+HTML - (default) Perform HTML encoding 
+Break - Perform HTML encoding and replace soft returns 
+with <br>
+Syntax example(s)
+Display a repeating field using an HTML file
+[FMP-Repeating: Extensions]
+Alternate phone extensions: [FMP-RepeatingItem]<br>
+[/FMP-Repeating]
+   <!-- After processing it could look like:
+Alternate phone extensions: x2353
+Alternate phone extensions: x3442
+-->
+Other tags that are required
+-DB, [FMP-Repeating], [/FMP-Repeating]
+
+=item Reset
+
+An HTML input type used to reset all other HTML input 
+types on the page back to their default values.
+This is not a FileMaker Pro tag, This is standard HTML.
+Syntax
+   <input type="reset" value="Button Text">
+Button Text - Button label text.
+Syntax example(s)
+Create a new record using an HTML file
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="db.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="radio" name="Country" value="F1">France
+   <input type="radio" name="Country" value="G7" checked>Germany
+   <input type="radio" name="Country" value="I4" checked>Iceland
+   <input type="radio" name="Country" value="U2">USA
+   <input type="submit" name="-New" value="New Record">
+   <input type="reset" value="Reset">
+   </form>
+
+=item Select
+
+An HTML input type. Used by a browser to display a scrolling 
+list.
+This is not a FileMaker Pro tag, This is standard HTML.
+Do not include calculation or summary field types on 
+add or update format files as data can't be entered 
+into these field types.
+Syntax
+   <select size=Rows name="Field">
+   <option value="Data" Selected>Visible Value
+   </select>
+Rows - Number of rows to display in the scrolling list.
+Field - The name of the field that you want the data 
+to go into.
+Data - The information that should be placed into the 
+field.
+Selected (optional) - Specifies that the scrolling list 
+item is selected. If the word "selected" is not present, 
+the scrolling list item is not selected.
+Visible Value - The value that the user sees in the 
+browser.
+Syntax example(s)
+Display a scrolling list using an HTML file
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="db.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <select size=4 name="Country">
+   <option value="F1" selected>France
+   <option value="G7">Germany
+   <option value="I4">Iceland
+   <option value="U2">USA
+   </select>
+   <input type="submit" name="-New" value="New Record">
+   </form>
+
+=item [FMP-SetCookie]
+
+The [FMP-SetCookie] tag is replaced with nothing in 
+the HTML and is used to store a variable in the user's 
+browser. It is used to store information that will be 
+needed in future visits.
+A cookie is saved by the browser. Therefore your user's 
+browser must support this feature, and the user must 
+have the feature enabled.
+Consult the Preliminary Specification for Persistent 
+Client State HTTP Cookies from Netscape for more information 
+about Cookies. <http:/search.netscape.com/newsref/std/cookie_spec.html>. 
+You may also check the Cookies and Privacy FAQ from 
+netscape at <http:/search.netscape.com/assist/security/faqs/cookies.html>
+Syntax
+[FMP-SetCookie: CookieName =CookieValue, Expires=Minutes 
+, Path=Pathname , Domain=DomainName ]
+Parameter(s)
+First parameter: The name and value for the cookie
+CookieName - The name of the cookie. Must be fewer than 
+1024 characters. Can either be the contents of a field 
+specified by "field: fieldname" or a text constant.
+CookieValue - The data value of the cookie. Must be 
+fewer than 1024 characters. Can either be the contents 
+of field specified by "field: fieldname" , the reserved 
+word CurrentRecID, or a text constant.
+Other parameters (optional): These may appear in any 
+order.
+Expires - The number of minutes in the future that the 
+cookie will expire. If not set, the cookie will expire 
+at the end of the user's session. A value of 0 or a 
+negative number may be used to have cookies expire immediately.
+Path - Sets the path attribute for the cookie. 'Pathname' 
+must be fewer than 256 characters. If not specified, 
+the path defaults to the path to FileMaker Pro. 
+Domain - Sets the domain attribute for the cookie. 'Domain' 
+must be fewer than 256 characters. If not set, the domain 
+defaults to the domain of the server.
+The total number of characters between the opening and 
+closing square brackets of the [FMP-SetCookie] tag must 
+be less than 2048. 
+Syntax example(s)
+Set a cookie using an HTML file
+You have selected your favorite color to be [FMP-Field: 
+ColorChoice]. A "cookie"
+has been set on your local machine so that the next 
+time you visit our site
+within the next month we will display the latest products 
+that come in the
+color [FMP-Field: ColorChoice].
+[FMP-SetCookie: ColorChoice=Field: ColorChoice, Expires=43200]
+   <!-- After processing it could look like:
+You have selected your favorite color to be green. A 
+"cookie"
+has been set on your local machine so that the next 
+time you visit our site
+within the next month we will display the latest products 
+that come in the
+color green.
+-->
+See also
+[FMP-Cookie]
+
+=item -Skip
+
+Tells FileMaker Pro how many records to skip before 
+displaying the set of records. Used with the -Max tag 
+to display a series of pages with a subset of the current 
+found set on each one.
+Value is
+A number from 0 through 2147483647, or the word "All". 
+If the value is greater then the number of records in 
+the found set or the value is "All" then the last record 
+is displayed. The default value is 0.
+Syntax example(s)
+Display some records using a link
+   <a href="FMPro?-DB=db.fp5&-Format=rslt.htm&-Skip=10&-Max=5&-FindAll">
+Display records 11 thru 15 in the database</a>
+Display some records using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="names.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="hidden" name="-Skip" value="9">
+   <input type="hidden" name="-Max" value="1">
+   <input type="submit" name="-FindAll" value="Display 
+record 10">
+   </form>
+Other tags that are required
+-DB, -Format, -Find or -FindAll
+See also
+-Max
+
+=item -SortField
+
+Specifies the field that will be used for sorting.
+This tag can been used multiple times to perform multiple 
+field sorts. The order in which the tag appears in the 
+URL or format file will determine the order of the fields.
+Value is
+Name of a FileMaker Pro field.
+Syntax example(s)
+Specify sort field using a link
+   <a href="-DB=Contacts&-Format=format.html&-SortField=First+Name&-FindAll">Sort 
+by First Name</a>
+Specify sort field using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="contacts.fp5">
+   <input type="hidden" name="-Format" value="format.html">
+   <input type="hidden" name="-SortField" value="Last Name">
+   <input type="hidden" name="-SortField" value="First 
+Name">
+   <input type="submit" name="-FindAll" value="Sort by 
+First Name">
+   </form>
+Other tags that are required
+-DB, -Format, -Find or -FindAll
+See also
+-SortOrder 
+
+=item [FMP-SortFieldItem]
+
+[FMP-SortFieldItem] is replaced with the field name 
+that was part of the request that created this page.
+[FMP-SortFieldItem] should be placed inside the [FMP-CurrentSort] 
+and [/FMP-CurrentSort] tags.
+Syntax
+[FMP-SortFieldItem: Encoding ]
+Parameter(s)
+First parameter: Encoding. Use one of the following 
+reserved words:
+Raw - Don't perform any encoding
+URL - Perform URL encoding
+HTML - (default) Perform HTML encoding 
+Syntax example(s)
+Return information about the current sort using an HTML 
+file
+Current sort order is:<br>
+[FMP-CurrentSort]
+Field: [FMP-SortFieldItem], Order: [FMP-SortOrderItem]<br>
+[/FMP-CurrentSort]
+   <!-- After processing it could look like:
+Current sort order is:
+Field: First Name, Order: descend
+Field: Last Name, Order: descend
+-->
+Other tags that are required
+[FMP-CurrentSort], [/FMP-CurrentSort]
+See also
+[FMP-SortOrderItem]
+
+=item -SortOrder
+
+Indicates the direction of a sort. If used, -SortOrder 
+must directly follow the -SortField it applies to.
+Value is
+The sort order. The list of valid sort orders is:
+Keyword (short) Keyword (long) FileMaker Pro Equivalent 
+Operator
+Ascend Ascending Sort a to z, -10 to 10
+Descend Descending Sort z to a, 10 to -10
+Custom Sort using the value list associated 
+with the field on the layout
+Custom=Value List Name Sort using the value list named
+Syntax example(s)
+Specify sort field using a link
+   <a href="-DB=db.fp5&-Format=sort.htm&-SortField=First+Name&-SortOrder=descend&-FindAll"> 
+Sort by First Name, descending</a>
+Specify sort field using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="contacts.fp5">
+   <input type="hidden" name="-Format" value="format.html">
+   <input type="hidden" name="-SortField" value="Colors">
+   <input type="hidden" name="-SortOrder" value="custom=Color 
+List">
+   <input type="submit" name="-FindAll" value="Sort by 
+Color">
+   </form>
+Other tags that are required
+-DB, -Format, -Lay (if using a custom sort order), -Find, 
+or -FindAll
+See also
+-SortField
+
+=item [FMP-SortOrderItem]
+
+[FMP-SortOrderItem] is replaced with the sort order 
+that was part of the request that created this page.
+[FMP-SortOrderItem] should be placed between the [FMP-CurrentSort] 
+and [/FMP-CurrentSort] tags.
+Syntax
+[FMP-SortOrderItem: Encoding ]
+Parameter(s)
+First parameter: Encoding. Use one of the following 
+reserved words:
+Raw - Don't perform any encoding
+URL - Perform URL encoding
+HTML - (default) Perform HTML encoding 
+Display - Returns the sort order in the language specified 
+by the Web Companion Configuration
+Syntax example(s)
+Return information about the current sort using an HTML 
+file
+Current sort order is:<br>
+[FMP-CurrentSort]
+Field: [FMP-SortFieldItem], Order: [FMP-SortOrderItem]<br>
+[/FMP-CurrentSort]
+   <!-- After processing it could look like:
+Current sort order is:
+Field: First Name, Order: descend
+Field: Last Name, Order: descend
+-->
+Other tags that are required
+[FMP-CurrentSort], [/FMP-CurrentSort]
+See also
+[FMP-SortFieldItem]
+
+=item -MailSub
+
+Specifies the subject of the email. 
+Value is
+Subject text.
+Syntax example(s)
+Send mail using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="contacts.fp5">
+   <input type="hidden" name="-Format" value="displaypage.html">
+   <input type="text" name="-MailTo" value="Keith@Company.COM">
+   <input type="text" name="-MailCC" value="Dirk@Company.COM">
+   <input type="text" name="-MailBCC" value="Terry@Company.COM">
+   <input type="text" name="-MailFrom" value="Chris@Company.COM">
+   <input type="text" name="-MailSub" value="The Subject">
+   <input type="hidden" name="-MailHost" value="SMTP.Company.COM">
+   <input type="hidden" name="-MailFormat" value="mail.txt">
+   <input type="submit" name="-View" value="Send Message">
+   </form>
+Other tags that are required
+-DB, -MailTo, -MailFrom, -MailHost, -MailFormat, any 
+action tag
+See also
+-MailCC, -MailBCC
+
+=item Submit
+
+An HTML input type. Used by a browser to create a button 
+that will perform an action. FileMaker Pro action tags 
+can be used with a submit button.
+This is not a FileMaker Pro tag, This is standard HTML.
+Do not include calculation or summary field types on 
+add or update format files, as data can't be entered 
+into these field types.
+Syntax
+   <input type="submit" name="Action Tag" value="Button 
+Text">
+Action Tag - Action to perform when the button is pressed.
+Button Text - Button label text.
+Syntax example(s)
+Create a new record using an HTML file
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="db.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="radio" name="Country" value="F1">France
+   <input type="radio" name="Country" value="G7" checked>Germany
+   <input type="radio" name="Country" value="I4" checked>Iceland
+   <input type="radio" name="Country" value="U2">USA
+   <input type="submit" name="-New" value="New Record">
+   </form>
+
+=item Text
+
+An HTML input type. Used by a browser to display a single 
+line of text.
+This is not a FileMaker Pro tag, This is standard HTML.
+Do not include calculation or summary field types on 
+add or update format files as data can't be entered 
+into these field types.
+Syntax
+   <input type="text" name="Field" value="Data">
+Field - The name of the field that you want the data 
+to go into.
+Data - The information that should be placed into the 
+field.
+Syntax example(s)
+Display a text field using an HTML file
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="db.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="text" name="Field Name" value="v1">
+   <input type="submit" name="-New" value="New Record">
+   </form>
+
+=item TextArea
+
+An HTML input type. Used by a browser to display multiple 
+lines of text.
+This is not a FileMaker Pro tag, This is standard HTML.
+Do not include calculation or summary field types in 
+an add or update format files as data can't be entered 
+into these field types.
+Syntax
+   <textarea name="Field" rows=Rows cols=Columns > Data 
+   </textarea>
+Field - The name of the field that you want the data 
+to go into.
+Rows - Number of rows of text to display.
+Columns - Number of characters to display per row.
+Data - The information that should be placed into the 
+field.
+Syntax example(s)
+Display a text area using an HTML file
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="db.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <textarea name="Description" rows=4 cols=40>
+Lots of text goes here.
+   </textarea>
+   <input type="submit" name="-New" value="New Record">
+   </form>
+
+=item -MailTo
+
+Specifies the email address of the person who the message 
+is going to.
+Value is
+An email address.
+Syntax example(s)
+Send mail using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="contacts.fp5">
+   <input type="hidden" name="-Format" value="displaypage.html">
+   <input type="text" name="-MailTo" value="Keith@Company.COM">
+   <input type="text" name="-MailCC" value="Dirk@Company.COM">
+   <input type="text" name="-MailBCC" value="Terry@Company.COM">
+   <input type="text" name="-MailFrom" value="Chris@Company.COM">
+   <input type="text" name="-MailSub" value="The Subject">
+   <input type="hidden" name="-MailHost" value="SMTP.Company.COM">
+   <input type="hidden" name="-MailFormat" value="mail.txt">
+   <input type="submit" name="-View" value="Send Message">
+   </form>
+Other tags that are required
+-DB, -MailFrom, -MailSub, -MailHost, -MailFormat, any 
+action tag
+See also
+-MailCC, -MailBCC
+
+=item -Token
+
+Passes any value to a format file. Whatever value you 
+set -Token equal to can be retrieved in the format file 
+by using the [FMP-CurrentToken] tag, or it can be used 
+in an [FMP-If] tag.
+Value is
+User defined.
+Syntax example(s)
+Pass a record ID as a token using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="contacts.fp5">
+   <input type="hidden" name="-Format" value="format.html">
+   <input type="hidden" name="-Token" value="[FMP-CurrentRecID]">
+   <input type="submit" name="-FindAll" value="Set a token">
+   </form>
+Continue to pass as token
+   <input type="hidden" name="-Token" value="[FMP-CurrentToken]">
+Specify a token using a link
+   <a href="-DB=Contacts&-Format=format.html&-Token=The+Token&-View">Set 
+a token</a>
+Up to nine tokens can be used by using a slightly different 
+syntax for the 
+token tags. The variable tag -Token can have an optional 
+token specifier of the form -Token.X
+where X can be the characters 0 through 9. If no period 
+follows the -Token keyword then token
+one is implied. To retrieve the value of a token the 
+FMP_CurrentToken will accept another
+parameter that is a number, of value 0 through 9. If 
+there is no number parameter, but there
+is a period, then token zero would be returned. CurrentToken 
+constant for the FMP-If tag
+would then have an optional specifier that would look 
+like CurrentToken:3 if you want to
+compare the contents of token three to something else.
+Example format file snippet:
+   <!-- Pass the value of token three onto the next request 
+-->
+   <INPUT TYPE="HIDDEN" NAME ="-Token.3" VALUE ="[FMP-CurrentToken: 
+3, HTML]">
+Tokens can be used on the right side of an FMP-If using 
+the intratag replacement syntax:
+[FMP-If: CurrentToken:5.eq.{CurrentToken:6}]
+   <B>Token 5 equals token 6.</B>
+[/FMP-If]
+Other tags that are required
+-DB, -Format, any action tag
+See also
+[FMP-CurrentToken]
+
+=item [FMP-ValueList]
+
+Repeats the HTML between [FMP-ValueList] and [/FMP-Valuelist] 
+for all the values in the specified value list. 
+Syntax
+[FMP-ValueList: Field Name , List=Value List Name ]
+Parameter(s)
+First parameter: Name of a field that the value list 
+is associated with.
+Second parameter (optional): Name of a value list to 
+use. The default is to use the value list associated 
+with the field on the specified layout.
+Syntax example(s)
+Display value List using an HTML file
+[FMP-ValueList: Groups, List=GroupList]
+   <input type="radio" name="Groups"
+value="[FMP-ValueListItem]" [FMP-ValueListChecked]>[FMP-ValueListItem]
+[/FMP-ValueList]
+   <!-- After processing, the HTML sent to the browser 
+could look like:
+   <input type="radio" name="Groups"
+value="Production" >Production
+   <input type="radio" name="Groups"
+value="Sales" checked>Sales
+   <input type="radio" name="Groups"
+value="Support" >Support
+-->
+Other tags that are required
+[/FMP-ValueList]
+See also
+[FMP-Option], [FMP-ValueListChecked], [FMP-ValueListItem]
+
+=item [FMP-ValueListChecked]
+
+[FMP-ValueListChecked] is replaced with the word "checked" 
+for every value list item that has been selected in 
+the specified field.
+Syntax example(s)
+Display a value list as radio buttons using an HTML 
+file
+[FMP-ValueList: Groups]
+   <input type="radio" name="Groups"
+value="[FMP-ValueListItem]" [FMP-ValueListChecked]>[FMP-ValueListItem]
+[/FMP-ValueList]
+   <!-- After processing, the HTML sent to the browser 
+could look like:
+   <input type="radio" name="Groups" 
+value="Production">Production
+   <input type="radio" name="Groups" 
+value="Sales" checked>Sales
+   <input type="radio" name="Groups" 
+value="Support">Support
+-->
+Other tags that are required
+[FMP-ValueList], [/FMP-ValueList]
+See also
+[FMP-ValueListItem], [FMP-Option]
+
+=item [FMP-ValueListItem]
+
+[FMP-ValueListItem] is replaced with the next element 
+of a value list.
+[FMP-ValueListItem] must be placed between the [FMP-ValueList] 
+and [/FMP-ValueList] tags.
+Syntax
+[FMP-ValueListItem: Checked, Encoding ]
+Parameter(s)
+First parameter (optional): Checked. Use one of the 
+following reserved words:
+Checked - Replace with the value list item if it is 
+selected in the database. Replace with nothing if the 
+value list item is not selected in the database.
+Always - (default) Always replace with the value list 
+item.
+Second parameter (optional): Encoding. Use one of the 
+following reserved words:
+Raw - Don't perform any encoding
+URL - Perform URL encoding
+HTML - (default) Perform HTML encoding 
+Syntax example(s)
+Display value list as radio buttons using an HTML file
+[FMP-ValueList: Groups]
+   <input type="radio" name="Groups"
+value="[FMP-ValueListItem]" [FMP-ValueListChecked]>[FMP-ValueListItem]
+[/FMP-ValueList]
+   <!-- After processing, the HTML sent to the browser 
+could look like:
+   <input type="radio" name="Groups"
+value="Production" checked>Production
+   <input type="radio" name="Groups"
+value="Sales">Sales
+   <input type="radio" name="Groups"
+value="Support" checked>Support
+-->
+Display only value list items that are selected using 
+an HTML file
+[FMP-ValueList: Groups]
+[FMP-ValueListItem: checked]
+[/FMP-ValueList]
+   <!-- After processing, the HTML sent to the browser 
+could look like:
+Production Support
+-->
+Other tags that are required
+-DB, [FMP-ValueList], [/FMP-ValueList]
+See also
+[FMP-ValueListChecked], [FMP-Option]
+
+=item [FMP-ValueNameItem]
+
+[FMP-ValueNameItem] is replaced by the name of a value 
+list.
+[FMP-ValueNameItem] must be placed between the [FMP-ValueNames] 
+and [/FMP-ValueNames] tags.
+Syntax
+[FMP-ValueNameItem: Encoding ]
+Parameter(s)
+First parameter (optional): Encoding. Use one of the 
+following reserved words:
+Raw - Don't perform any encoding
+URL - Perform URL encoding
+HTML - (default) Perform HTML encoding 
+Syntax example(s)
+Create a pop-up menu for use with the -SortOrder tag 
+in an HTML file
+   <select name="-SortOrder">
+   <option>Ascending
+   <option>Descending
+[FMP-ValueNames]
+   <option value="Custom=[FMP-ValueNameItem]">[FMP-ValueNameItem]
+[/FMP-ValueNames]
+   </select>
+   <!-- After processing, the HTML sent to the browser 
+could look like:
+   <select name="-SortOrder">
+   <option>Ascending
+   <option>Descending
+   <option value="Custom=Colors">Colors
+   <option value="Custom=Sizes">Sizes
+   </select>
+-->
+Other tags that are required
+[FMP-ValueNames], [/FMP-ValueNames]
+
+=item [FMP-ValueNames]
+
+Repeats the HTML between [FMP-ValueNames] and [/FMP-ValueNames] 
+for all the value lists that are in the database.
+Syntax example(s)
+Create a pop-up menu for use with the -SortOrder tag 
+in an HTML file
+   <select name="-SortOrder">
+   <option>Ascending
+   <option>Descending
+[FMP-ValueNames]
+   <option value="Custom=[FMP-ValueNameItem]">[FMP-ValueNameItem]
+[/FMP-ValueNames]
+   </select>
+   <!-- After processing, the HTML sent to the browser 
+could look like:
+   <select name="-SortOrder">
+   <option>Ascending
+   <option>Descending
+   <option value="Custom=Colors">Colors
+   <option value="Custom=Sizes">Sizes
+   </select>
+-->
+Other tags that are required
+[/FMP-ValueNames] 
+See also
+[FMP-ValueNameItem]
+
+=item -View
+
+Displays search or add form. Used to process any format 
+files that do not require record data.
+Syntax example(s)
+View a format file using a link
+   <a href="FMPro?-DB=db.fp5&-Format=query.htm&-View">"Take 
+me to a search page"</a>
+View a format file using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="names.fp5">
+   <input type="hidden" name="-Format" value="query.htm">
+   <input type="submit" name="-View" value="Show Search 
+Page">
+   </form>
+Other tags that are required
+-DB, -Format
+
+
+Table (2,3):
+=item -MailSub
+
+Specifies the subject of the email. 
+Value is
+Subject text.
+Syntax example(s)
+Send mail using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="contacts.fp5">
+   <input type="hidden" name="-Format" value="displaypage.html">
+   <input type="text" name="-MailTo" value="Keith@Company.COM">
+   <input type="text" name="-MailCC" value="Dirk@Company.COM">
+   <input type="text" name="-MailBCC" value="Terry@Company.COM">
+   <input type="text" name="-MailFrom" value="Chris@Company.COM">
+   <input type="text" name="-MailSub" value="The Subject">
+   <input type="hidden" name="-MailHost" value="SMTP.Company.COM">
+   <input type="hidden" name="-MailFormat" value="mail.txt">
+   <input type="submit" name="-View" value="Send Message">
+   </form>
+Other tags that are required
+-DB, -MailTo, -MailFrom, -MailHost, -MailFormat, any 
+action tag
+See also
+-MailCC, -MailBCC
+
+=item Submit
+
+An HTML input type. Used by a browser to create a button 
+that will perform an action. FileMaker Pro action tags 
+can be used with a submit button.
+This is not a FileMaker Pro tag, This is standard HTML.
+Do not include calculation or summary field types on 
+add or update format files, as data can't be entered 
+into these field types.
+Syntax
+   <input type="submit" name="Action Tag" value="Button 
+Text">
+Action Tag - Action to perform when the button is pressed.
+Button Text - Button label text.
+Syntax example(s)
+Create a new record using an HTML file
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="db.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="radio" name="Country" value="F1">France
+   <input type="radio" name="Country" value="G7" checked>Germany
+   <input type="radio" name="Country" value="I4" checked>Iceland
+   <input type="radio" name="Country" value="U2">USA
+   <input type="submit" name="-New" value="New Record">
+   </form>
+
+=item Text
+
+An HTML input type. Used by a browser to display a single 
+line of text.
+This is not a FileMaker Pro tag, This is standard HTML.
+Do not include calculation or summary field types on 
+add or update format files as data can't be entered 
+into these field types.
+Syntax
+   <input type="text" name="Field" value="Data">
+Field - The name of the field that you want the data 
+to go into.
+Data - The information that should be placed into the 
+field.
+Syntax example(s)
+Display a text field using an HTML file
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="db.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <input type="text" name="Field Name" value="v1">
+   <input type="submit" name="-New" value="New Record">
+   </form>
+
+=item TextArea
+
+An HTML input type. Used by a browser to display multiple 
+lines of text.
+This is not a FileMaker Pro tag, This is standard HTML.
+Do not include calculation or summary field types in 
+an add or update format files as data can't be entered 
+into these field types.
+Syntax
+   <textarea name="Field" rows=Rows cols=Columns > Data 
+   </textarea>
+Field - The name of the field that you want the data 
+to go into.
+Rows - Number of rows of text to display.
+Columns - Number of characters to display per row.
+Data - The information that should be placed into the 
+field.
+Syntax example(s)
+Display a text area using an HTML file
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="db.fp5">
+   <input type="hidden" name="-Format" value="results.htm">
+   <textarea name="Description" rows=4 cols=40>
+Lots of text goes here.
+   </textarea>
+   <input type="submit" name="-New" value="New Record">
+   </form>
+
+=item -MailTo
+
+Specifies the email address of the person who the message 
+is going to.
+Value is
+An email address.
+Syntax example(s)
+Send mail using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="contacts.fp5">
+   <input type="hidden" name="-Format" value="displaypage.html">
+   <input type="text" name="-MailTo" value="Keith@Company.COM">
+   <input type="text" name="-MailCC" value="Dirk@Company.COM">
+   <input type="text" name="-MailBCC" value="Terry@Company.COM">
+   <input type="text" name="-MailFrom" value="Chris@Company.COM">
+   <input type="text" name="-MailSub" value="The Subject">
+   <input type="hidden" name="-MailHost" value="SMTP.Company.COM">
+   <input type="hidden" name="-MailFormat" value="mail.txt">
+   <input type="submit" name="-View" value="Send Message">
+   </form>
+Other tags that are required
+-DB, -MailFrom, -MailSub, -MailHost, -MailFormat, any 
+action tag
+See also
+-MailCC, -MailBCC
+
+=item -Token
+
+Passes any value to a format file. Whatever value you 
+set -Token equal to can be retrieved in the format file 
+by using the [FMP-CurrentToken] tag, or it can be used 
+in an [FMP-If] tag.
+Value is
+User defined.
+Syntax example(s)
+Pass a record ID as a token using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="contacts.fp5">
+   <input type="hidden" name="-Format" value="format.html">
+   <input type="hidden" name="-Token" value="[FMP-CurrentRecID]">
+   <input type="submit" name="-FindAll" value="Set a token">
+   </form>
+Continue to pass as token
+   <input type="hidden" name="-Token" value="[FMP-CurrentToken]">
+Specify a token using a link
+   <a href="-DB=Contacts&-Format=format.html&-Token=The+Token&-View">Set 
+a token</a>
+Up to nine tokens can be used by using a slightly different 
+syntax for the 
+token tags. The variable tag -Token can have an optional 
+token specifier of the form -Token.X
+where X can be the characters 0 through 9. If no period 
+follows the -Token keyword then token
+one is implied. To retrieve the value of a token the 
+FMP_CurrentToken will accept another
+parameter that is a number, of value 0 through 9. If 
+there is no number parameter, but there
+is a period, then token zero would be returned. CurrentToken 
+constant for the FMP-If tag
+would then have an optional specifier that would look 
+like CurrentToken:3 if you want to
+compare the contents of token three to something else.
+Example format file snippet:
+   <!-- Pass the value of token three onto the next request 
+-->
+   <INPUT TYPE="HIDDEN" NAME ="-Token.3" VALUE ="[FMP-CurrentToken: 
+3, HTML]">
+Tokens can be used on the right side of an FMP-If using 
+the intratag replacement syntax:
+[FMP-If: CurrentToken:5.eq.{CurrentToken:6}]
+   <B>Token 5 equals token 6.</B>
+[/FMP-If]
+Other tags that are required
+-DB, -Format, any action tag
+See also
+[FMP-CurrentToken]
+
+=item [FMP-ValueList]
+
+Repeats the HTML between [FMP-ValueList] and [/FMP-Valuelist] 
+for all the values in the specified value list. 
+Syntax
+[FMP-ValueList: Field Name , List=Value List Name ]
+Parameter(s)
+First parameter: Name of a field that the value list 
+is associated with.
+Second parameter (optional): Name of a value list to 
+use. The default is to use the value list associated 
+with the field on the specified layout.
+Syntax example(s)
+Display value List using an HTML file
+[FMP-ValueList: Groups, List=GroupList]
+   <input type="radio" name="Groups"
+value="[FMP-ValueListItem]" [FMP-ValueListChecked]>[FMP-ValueListItem]
+[/FMP-ValueList]
+   <!-- After processing, the HTML sent to the browser 
+could look like:
+   <input type="radio" name="Groups"
+value="Production" >Production
+   <input type="radio" name="Groups"
+value="Sales" checked>Sales
+   <input type="radio" name="Groups"
+value="Support" >Support
+-->
+Other tags that are required
+[/FMP-ValueList]
+See also
+[FMP-Option], [FMP-ValueListChecked], [FMP-ValueListItem]
+
+=item [FMP-ValueListChecked]
+
+[FMP-ValueListChecked] is replaced with the word "checked" 
+for every value list item that has been selected in 
+the specified field.
+Syntax example(s)
+Display a value list as radio buttons using an HTML 
+file
+[FMP-ValueList: Groups]
+   <input type="radio" name="Groups"
+value="[FMP-ValueListItem]" [FMP-ValueListChecked]>[FMP-ValueListItem]
+[/FMP-ValueList]
+   <!-- After processing, the HTML sent to the browser 
+could look like:
+   <input type="radio" name="Groups" 
+value="Production">Production
+   <input type="radio" name="Groups" 
+value="Sales" checked>Sales
+   <input type="radio" name="Groups" 
+value="Support">Support
+-->
+Other tags that are required
+[FMP-ValueList], [/FMP-ValueList]
+See also
+[FMP-ValueListItem], [FMP-Option]
+
+=item [FMP-ValueListItem]
+
+[FMP-ValueListItem] is replaced with the next element 
+of a value list.
+[FMP-ValueListItem] must be placed between the [FMP-ValueList] 
+and [/FMP-ValueList] tags.
+Syntax
+[FMP-ValueListItem: Checked, Encoding ]
+Parameter(s)
+First parameter (optional): Checked. Use one of the 
+following reserved words:
+Checked - Replace with the value list item if it is 
+selected in the database. Replace with nothing if the 
+value list item is not selected in the database.
+Always - (default) Always replace with the value list 
+item.
+Second parameter (optional): Encoding. Use one of the 
+following reserved words:
+Raw - Don't perform any encoding
+URL - Perform URL encoding
+HTML - (default) Perform HTML encoding 
+Syntax example(s)
+Display value list as radio buttons using an HTML file
+[FMP-ValueList: Groups]
+   <input type="radio" name="Groups"
+value="[FMP-ValueListItem]" [FMP-ValueListChecked]>[FMP-ValueListItem]
+[/FMP-ValueList]
+   <!-- After processing, the HTML sent to the browser 
+could look like:
+   <input type="radio" name="Groups"
+value="Production" checked>Production
+   <input type="radio" name="Groups"
+value="Sales">Sales
+   <input type="radio" name="Groups"
+value="Support" checked>Support
+-->
+Display only value list items that are selected using 
+an HTML file
+[FMP-ValueList: Groups]
+[FMP-ValueListItem: checked]
+[/FMP-ValueList]
+   <!-- After processing, the HTML sent to the browser 
+could look like:
+Production Support
+-->
+Other tags that are required
+-DB, [FMP-ValueList], [/FMP-ValueList]
+See also
+[FMP-ValueListChecked], [FMP-Option]
+
+=item [FMP-ValueNameItem]
+
+[FMP-ValueNameItem] is replaced by the name of a value 
+list.
+[FMP-ValueNameItem] must be placed between the [FMP-ValueNames] 
+and [/FMP-ValueNames] tags.
+Syntax
+[FMP-ValueNameItem: Encoding ]
+Parameter(s)
+First parameter (optional): Encoding. Use one of the 
+following reserved words:
+Raw - Don't perform any encoding
+URL - Perform URL encoding
+HTML - (default) Perform HTML encoding 
+Syntax example(s)
+Create a pop-up menu for use with the -SortOrder tag 
+in an HTML file
+   <select name="-SortOrder">
+   <option>Ascending
+   <option>Descending
+[FMP-ValueNames]
+   <option value="Custom=[FMP-ValueNameItem]">[FMP-ValueNameItem]
+[/FMP-ValueNames]
+   </select>
+   <!-- After processing, the HTML sent to the browser 
+could look like:
+   <select name="-SortOrder">
+   <option>Ascending
+   <option>Descending
+   <option value="Custom=Colors">Colors
+   <option value="Custom=Sizes">Sizes
+   </select>
+-->
+Other tags that are required
+[FMP-ValueNames], [/FMP-ValueNames]
+
+=item [FMP-ValueNames]
+
+Repeats the HTML between [FMP-ValueNames] and [/FMP-ValueNames] 
+for all the value lists that are in the database.
+Syntax example(s)
+Create a pop-up menu for use with the -SortOrder tag 
+in an HTML file
+   <select name="-SortOrder">
+   <option>Ascending
+   <option>Descending
+[FMP-ValueNames]
+   <option value="Custom=[FMP-ValueNameItem]">[FMP-ValueNameItem]
+[/FMP-ValueNames]
+   </select>
+   <!-- After processing, the HTML sent to the browser 
+could look like:
+   <select name="-SortOrder">
+   <option>Ascending
+   <option>Descending
+   <option value="Custom=Colors">Colors
+   <option value="Custom=Sizes">Sizes
+   </select>
+-->
+Other tags that are required
+[/FMP-ValueNames] 
+See also
+[FMP-ValueNameItem]
+
+=item -View
+
+Displays search or add form. Used to process any format 
+files that do not require record data.
+Syntax example(s)
+View a format file using a link
+   <a href="FMPro?-DB=db.fp5&-Format=query.htm&-View">"Take 
+me to a search page"</a>
+View a format file using a form action
+   <form action="FMPro" method="post">
+   <input type="hidden" name="-DB" value="names.fp5">
+   <input type="hidden" name="-Format" value="query.htm">
+   <input type="submit" name="-View" value="Show Search 
+Page">
+   </form>
+Other tags that are required
+-DB, -Format
+
+
