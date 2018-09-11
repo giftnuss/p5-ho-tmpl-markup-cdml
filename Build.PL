@@ -12,6 +12,6 @@ Module::Build->new
 
       requires =>
           { perl => 5.010
-          , 'HO::class' => 0.07
+          , 'HO::class' => 0.076
       }
     )->create_build_script;

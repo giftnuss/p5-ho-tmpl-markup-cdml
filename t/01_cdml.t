@@ -2,12 +2,14 @@
 ; use strict; use warnings
 
 ; BEGIN
-    { use_ok( 'HO::Tmpl::Markup::CDML','Cdml' ) 
+    { use_ok( 'HO::Tmpl::Markup::CDML','Cdml' )
     }
-  
+
+; is(Cdml(),'HO::Tmpl::Markup::CDML')
+
 ; my $clientaddress = Cdml->client('address')
 ; is("".$clientaddress,'[FMP-ClientAddress]','ClientAddress')
-  
+
 ; my $clientip = Cdml->client("ip")
 ; is("".$clientip,'[FMP-ClientIP]','ClientIP');
 
@@ -23,7 +25,7 @@
 ; my $mimetype = Cdml->content('mimetype','text/xml')
 ; is("".$mimetype,'[FMP-ContentMIMEType: text/xml]','MIME type')
 
-;exit  
+;exit
 ; my $f=new CDML::Field('X')
 ; is("$f",'[FMP-Field: X, Raw]')
 

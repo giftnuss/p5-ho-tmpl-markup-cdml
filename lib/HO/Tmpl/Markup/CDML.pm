@@ -1,7 +1,7 @@
-  package HO::Tmpl::Markup::CDML
-# ******************************
-; our $VERSION='0.02'
-# *******************
+  package HO::Tmpl::Markup::CDML;
+# *******************************
+  our $VERSION='0.02';
+# ********************
 ; use strict; use warnings; use utf8
 ; no warnings "void"
 
@@ -132,29 +132,6 @@
 
 ; sub inlineaction
     { return new HO::('[FMP-InlineAction]IA - is a todo.[/FMP-InlineAction]')
-    }
-
-; package HO::Tmpl::Markup::CDML::element
-# ***************************************
-; our $VERSION='0.03'
-# *******************
-
-; use base 'HO::tag'
-
-; sub _begin_tag    () { '[FMP-' }  # inline
-; sub _close_tag    () { ']' }      # inline
-; sub _close_stag   () { ']' }      # inline
-; sub _begin_endtag () { '[/FMP-' } # inline
-
-; sub set_tag_param
-    { my ($self,$param) = @_
-    ; return $self->set_attribute('param' => $param)
-    }
-
-; sub attributes_string
-    { my ($self) = @_
-    ; my $param  = $self->get_attribute('param')
-    ; return $param ? ": $param" : ''
     }
 
 ; 1
