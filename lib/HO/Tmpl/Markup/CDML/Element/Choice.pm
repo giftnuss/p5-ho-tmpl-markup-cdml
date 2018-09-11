@@ -23,7 +23,7 @@
         { $self->get_attribute('default')->insert($else)
         }
       else
-        { $self->set_attribute('default',new HO($else))
+        { $self->set_attribute('default',new HO::Object::($else))
         }
     ; return $self
     }
@@ -32,8 +32,7 @@
     { my ($self,@args) = @_
     ; my $class = ref $self
 
-    ; my $idx = HO::accessor::_value_of($class,"_insert")
-    ; $self->[$idx] = $custom_insert
+    ; $self->[$self->_insert] = $custom_insert
 
     ; return $self->insert(@args)
     }
